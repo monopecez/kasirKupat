@@ -23,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -31,9 +32,13 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Set;
 import java.util.UUID;
 import com.github.anastaciocintra.escpos.EscPos;
+import com.github.anastaciocintra.escpos.EscPosConst;
+import com.github.anastaciocintra.escpos.Style;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Runnable {
@@ -52,15 +57,18 @@ public class MainActivity extends AppCompatActivity
     private EscPos escpos;
     BluetoothDevice mBluetoothDevice;
 
+
     static int priceIndex = 0;
-    static int[] hargaKupat1   =   {15000, 18000};
-    static int[] hargaKupatSet =   {10000, 12000};
-    static int[] hargaKari1    =   {17000, 22000};
-    static int[] hargaKariSet  =   {12000, 15000};
-    static int[] hargaTelur    =   {3500, 5000};
-    static int[] hargaKerupukM =   {2000, 2000};
+    static int[] hargaKupat1   =   {17000, 21250};
+    static int[] hargaKupatSet =   {13000, 16250};
+    static int[] hargaKari1    =   {20000, 25000};
+    static int[] hargaKariSet  =   {15000, 18750};
+    static int[] hargaTelur    =   {4000, 5000};
+    static int[] hargaKerupukM =   {2000, 2500};
     static int[] hargaKerupukA =   {500, 625};
-    static int[] hargaEmping   =   {3500, 4000};
+    static int[] hargaEmping   =   {4000, 5000};
+    static int[] hargaTahu     =    {2000, 2500};
+    static int[] hargaPeyek      =   {10000, 12500};
 
     static int nKupat = 0;
     static int nKupatSet = 0;
@@ -72,6 +80,9 @@ public class MainActivity extends AppCompatActivity
     static int nKerupukM = 0;
     static int nKerupukA = 0;
     static int nEmping = 0;
+    static int nTahu = 0;
+    static int nPeyek = 0;
+
 
     static int hargaTotal = 0;
     static int totalHargaKupat = 0;
@@ -84,6 +95,10 @@ public class MainActivity extends AppCompatActivity
     static int totalHargaKerupukM = 0;
     static int totalHargaKerupukA = 0;
     static int totalHargaEmping = 0;
+    static int totalHargaTahu = 0;
+    static int totalHargaPeyek = 0;
+
+    static Switch gojekSwitch;
 
     static Button btnPrint;
     static TextView kupat1total;
@@ -96,6 +111,13 @@ public class MainActivity extends AppCompatActivity
     static TextView kerupukmerahtotal;
     static TextView kerupukacitotal;
     static TextView empingtotal;
+    static TextView tahutotal;
+    static TextView peyektotal;
+
+
+    static EditText gojekpemesan;
+    static EditText gojekpin;
+    static EditText gojekantrian;
 
 
     static void calculatePrice(int priceIndex){
@@ -120,8 +142,16 @@ public class MainActivity extends AppCompatActivity
         totalHargaEmping = hargaEmping[priceIndex] * nEmping;
         empingtotal.setText(nEmping + " | " + totalHargaEmping);
 
+        totalHargaTahu = hargaTahu[priceIndex] * nTahu;
+        tahutotal.setText(nTahu + " | " + totalHargaTahu);
+
+        totalHargaPeyek = hargaPeyek[priceIndex] * nPeyek;
+        peyektotal.setText(nPeyek + " | " + totalHargaPeyek);
+
+
         hargaTotal = totalHargaKupat + totalHargaKupatSet + totalHargaKariAyam + totalHargaKariAyamSet +
-                totalHargaKariSapi + totalHargaKariSapiSet + totalHargaTelur + totalHargaKerupukM + totalHargaKerupukA + totalHargaEmping;
+                totalHargaKariSapi + totalHargaKariSapiSet + totalHargaTelur + totalHargaKerupukM + totalHargaKerupukA + totalHargaEmping+
+        totalHargaTahu + totalHargaPeyek;
         btnPrint.setText("" + hargaTotal);
 
     }
@@ -182,11 +212,21 @@ public class MainActivity extends AppCompatActivity
         Button empingtambah = (Button) findViewById(R.id.empingtambah);
         Button empingkurang = (Button) findViewById(R.id.empingkurang);
         empingtotal = (TextView) findViewById(R.id.empingtotal);
+        Button tahutambah = (Button) findViewById(R.id.tahutambah);
+        Button tahukurang = (Button) findViewById(R.id.tahukurang);
+        tahutotal = (TextView) findViewById(R.id.tahutotal);
+        Button peyektambah = (Button) findViewById(R.id.rempeyektambah);
+        Button peyekkurang = (Button) findViewById(R.id.rempeyekkurang);
+        peyektotal = (TextView) findViewById(R.id.rempeyektotal);
+
+        gojekpemesan = (EditText) findViewById(R.id.gojekpemesan);
+        gojekpin = (EditText) findViewById(R.id.gojekpin);
+        gojekantrian = (EditText) findViewById(R.id.gojekantrian);
 
 
         //GOJEK HEADER
         final ConstraintLayout gojekDetail = (ConstraintLayout) findViewById(R.id.gojekDetail);
-        Switch gojekSwitch = (Switch) findViewById(R.id.gojekswitch);
+        gojekSwitch = (Switch) findViewById(R.id.gojekswitch);
         gojekSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -400,12 +440,51 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+        tahutambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nTahu += 1;
+                calculatePrice(priceIndex);
+            }
+        });
+
+        tahukurang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nTahu -= 1;
+                if (nTahu < 0){
+                    nTahu = 0;
+                }
+                calculatePrice(priceIndex);
+            }
+        });
+
+        peyektambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nPeyek += 1;
+                calculatePrice(priceIndex);
+            }
+        });
+
+        peyekkurang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nPeyek -= 1;
+                if (nPeyek < 0){
+                    nPeyek = 0;
+                }
+                calculatePrice(priceIndex);
+            }
+        });
+
+
+
+
         btnPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PrintReceipt();
-
-
+                if (hargaTotal != 0) {PrintReceipt();}
             }
         });
 
@@ -467,6 +546,11 @@ public class MainActivity extends AppCompatActivity
             nKerupukM = 0;
             nKerupukA = 0;
             nEmping = 0;
+            nTahu = 0;
+            nPeyek = 0;
+            gojekpemesan.setText("");
+            gojekpin.setText("");
+            gojekantrian.setText("");
             calculatePrice(priceIndex);
 
 
@@ -622,14 +706,45 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void PrintReceipt(){
+        if (mBluetoothSocket == null){
+            Toast.makeText(MainActivity.this, "Silakan hubungkan printer terlebih dahulu", Toast.LENGTH_SHORT).show();
+        } else {
         Thread t = new Thread() {
             public void run() {
                 try {
                     OutputStream os = mBluetoothSocket.getOutputStream();
                     escpos = new EscPos(os);
-                    escpos.
-                    escpos.feed(3);
-                    escpos.close();
+                    Style title = new Style()
+                            .setFontSize(Style.FontSize._3, Style.FontSize._3)
+                            .setJustification(EscPosConst.Justification.Center);
+                    escpos.feed(2);
+                    escpos.writeLF(title, "KUPAT TAHU");
+                    escpos.writeLF(title, "LONTONG KARI");
+                    title = new Style().setJustification(EscPosConst.Justification.Center);
+                    escpos.writeLF(title,"CICENDO - 1967 | 085108253545");
+                    escpos.writeLF(title, "--------------------");
+
+                    if (gojekSwitch.isChecked()){
+                        escpos.writeLF("A/N: " + gojekpemesan.getText().toString());
+                        escpos.write("No : " + gojekantrian.getText().toString() + " | PIN: ");
+                        //Style PIN = new Style().setColorMode(Style.ColorMode.WhiteOnBlack);
+                        escpos.writeLF(gojekpin.getText().toString());}
+
+                    else {
+                        escpos.writeLF("A/N: -");
+                        escpos.writeLF("No : -");
+                    }
+
+                    escpos.feed(1);
+                    ReceiptBuilder(escpos);
+                    escpos.writeLF(title, "--------------------");
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String formattedDate = df.format(c.getTime());
+                    escpos.writeLF(title, "TERIMA KASIH :)");
+                    escpos.writeLF(title, formattedDate);
+                    escpos.writeLF(title, "--------------------");
+                    escpos.feed(2);
 
 
                 } catch (Exception e) {
@@ -638,12 +753,35 @@ public class MainActivity extends AppCompatActivity
             }
         };
         t.start();
-    }
+    }}
 
 
-    public String ReceiptBuilder(){
-        String result = "";
+    public void ReceiptBuilder(EscPos escpos) throws IOException {
+        if (hargaTotal != 0){
+            Style rightJust = new Style().setJustification(EscPosConst.Justification.Right);
+            if (nKupat != 0){escpos.writeLF(nKupat +  " x Kupat Tahu @" + hargaKupat1[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaKupat);}
+            if (nKupatSet != 0){escpos.writeLF(nKupatSet + " x Kpt Tahu ½ @" + hargaKupatSet[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaKupatSet);}
+            if (nKariAyam != 0){escpos.writeLF(nKariAyam + " x Kari Ayam  @" + hargaKari1[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaKariAyam);}
+            if (nKariAyamSet != 0){escpos.writeLF(nKariAyamSet + " x Kari Ayam½ @" + hargaKariSet[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaKariAyamSet);}
+            if (nKariSapi != 0){escpos.writeLF(nKariSapi + " x Kari Sapi  @" + hargaKari1[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaKariSapi);}
+            if (nKariSapiSet != 0){escpos.writeLF(nKariSapiSet + " x Kari Sapi½ @" + hargaKariSet[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaKariSapiSet);}
+            if (nTelur != 0){escpos.writeLF(nTelur + " x Telur      @" + hargaTelur[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaTelur);}
+            if (nKerupukM != 0){escpos.writeLF(nKerupukM + " x Kerupuk M  @" + hargaKerupukM[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaKerupukM);}
+            if (nKerupukA != 0){escpos.writeLF(nKerupukA + " x Kerupuk A  @" + hargaKerupukA[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaKerupukA);}
+            if (nEmping != 0){escpos.writeLF(nEmping + " x Emping    @" + hargaEmping[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaEmping);}
+            if (nTahu != 0){escpos.writeLF(nTahu + " x Tahu      @" + hargaTahu[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaTahu);}
+            if (nPeyek != 0){escpos.writeLF(nPeyek + " x Rempeyek  @" + hargaPeyek[priceIndex]); escpos.writeLF(rightJust, "" + totalHargaPeyek);}
 
-        return result;
+            escpos.writeLF(rightJust, "Total: " + hargaTotal);
+
+
+
+
+
+
+
+        }
+
+
     }
 }
