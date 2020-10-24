@@ -6,8 +6,10 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -63,24 +65,26 @@ public class MainActivity extends AppCompatActivity
 
 
     static int priceIndex = 0;
-    static int[] hargaKupat1   =   {18000, 22500, 20000};
-//    static int[] hargaKupat1   =   {18000, 22500, 20000};
-    static int[] hargaKupatSet =   {14000, 17500, 15000};
-    static int[] hargaKari1    =   {21000, 26550, 23000};
-//    static int[] hargaKari1    =   {21000, 26550, 23000};
-    static int[] hargaKariSet  =   {16000, 20000, 17000};
-    static int[] hargaTelur    =   {4000, 5000, 4500};
-    static int[] hargaKerupukM =   {1000, 1250, 2250};
-    static int[] hargaKerupukA =   {500, 625, 600};
-    static int[] hargaEmping   =   {4000, 5000, 4500};
-    static int[] hargaTahu     =    {2500, 3125, 2250};
-    static int[] hargaPeyek     =   {10000, 12500, 11000};
-    static int[] hargaDaging    =   {8000, 10000, 7000};
-    static int[] hargaDagingA   =   {6000, 7500, 7000};
-    static int[] hargaBumbu     =   {7000, 8750, 7000};
-    static int[] hargaSaroja    =   {9000, 11250, 10000};
-    static int[] hargaKentang   =   {10000, 12500, 10000};
-    static int[] hargaLontongP  =   {6000, 7500, 7500};
+    int[] hargaKupat1   ;
+    int[] hargaKupatSet ;
+    int[] hargaTahuToge1   ;
+    int[] hargaTahuTogeSet ;
+    int[] hargaKariAyam1    ;
+    int[] hargaKariAyamSet  ;
+    int[] hargaKariSapi1    ;
+    int[] hargaKariSapiSet  ;
+    int[] hargaTelur    ;
+    int[] hargaKerupukM ;
+    int[] hargaKerupukA ;
+    int[] hargaEmping   ;
+    int[] hargaTahu     ;
+    int[] hargaPeyek     ;
+    int[] hargaDaging    ;
+    int[] hargaDagingA   ;
+    int[] hargaBumbu     ;
+    int[] hargaSaroja    ;
+    int[] hargaKentang   ;
+    int[] hargaLontongP  ;
 
     static int nKupat = 0;
     static int nKupatSet = 0;
@@ -164,9 +168,7 @@ public class MainActivity extends AppCompatActivity
     static TextView kentangtotal;
     static TextView lontongptotal;
 
-
     static TextView totalhargaTV;
-
 
     static EditText gojekpemesan;
     static EditText gojekpin;
@@ -175,17 +177,17 @@ public class MainActivity extends AppCompatActivity
     static EditText pindialog;
 
 
-    static void calculatePrice(int priceIndex){
+    void calculatePrice(int priceIndex){
         totalHargaKupat = hargaKupat1[priceIndex] * nKupat;
         kupat1total.setText(nKupat + " | " + totalHargaKupat);
 
         totalHargaKupatSet = hargaKupatSet[priceIndex] * nKupatSet;
         kupatsettotal.setText(nKupatSet + " | " + totalHargaKupatSet);
 
-        totalHargaTahuToge = hargaKupat1[priceIndex] * nTahuToge;
+        totalHargaTahuToge = hargaTahuToge1[priceIndex] * nTahuToge;
         tahutoge1total.setText(nTahuToge + " | " + totalHargaTahuToge);
 
-        totalHargaTahuTogeSet = hargaKupatSet[priceIndex] * nTahuTogeSet;
+        totalHargaTahuTogeSet = hargaTahuTogeSet[priceIndex] * nTahuTogeSet;
         tahutogesettotal.setText(nTahuTogeSet + " | " + totalHargaTahuTogeSet);
 
         totalHargaTahu = hargaTahu[priceIndex] * nTahu;
@@ -194,25 +196,23 @@ public class MainActivity extends AppCompatActivity
         totalHargaBumbu = hargaBumbu[priceIndex] * nBumbu;
         bumbutotal.setText(nBumbu + " | " + totalHargaBumbu);
 
-        totalHargaKariAyam = hargaKari1[priceIndex] * nKariAyam;
+        totalHargaKariAyam = hargaKariAyam1[priceIndex] * nKariAyam;
         kariayam1total.setText(nKariAyam + " | " + totalHargaKariAyam);
 
-        totalHargaKariAyamSet = hargaKariSet[priceIndex] * nKariAyamSet;
+        totalHargaKariAyamSet = hargaKariAyamSet[priceIndex] * nKariAyamSet;
         kariayamsettotal.setText(nKariAyamSet + " | " + totalHargaKariAyamSet);
 
         totalHargaDagingA = hargaDagingA[priceIndex] * nDagingA;
         dagingatotal.setText(nDagingA + " | " + totalHargaDagingA);
 
-
-        totalHargaKariSapi = hargaKari1[priceIndex] * nKariSapi;
+        totalHargaKariSapi = hargaKariSapi1[priceIndex] * nKariSapi;
         karisapi1total.setText(nKariSapi + " | " + totalHargaKariSapi);
 
-        totalHargaKariSapiSet = hargaKariSet[priceIndex] * nKariSapiSet;
+        totalHargaKariSapiSet = hargaKariSapiSet[priceIndex] * nKariSapiSet;
         karisapisettotal.setText(nKariSapiSet + " | " + totalHargaKariSapiSet);
 
         totalHargaDaging = hargaDaging[priceIndex] * nDaging;
         dagingtotal.setText(nDaging + " | " + totalHargaDaging);
-
 
         totalHargaTelur = hargaTelur[priceIndex] * nTelur;
         telurtotal.setText(nTelur + " | " + totalHargaTelur);
@@ -264,6 +264,114 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        SharedPreferences sharedPref = getSharedPreferences("pricesPreferences",
+                Context.MODE_PRIVATE);
+        if (sharedPref.contains("created")) {
+            hargaKupat1 = new int[]{sharedPref.getInt("hargaKupatN", -1), sharedPref.getInt("hargaKupatGo", -1), sharedPref.getInt("hargaKupatGr", -1)};
+            hargaKupatSet = new int[]{sharedPref.getInt("hargaKupatSetN", -1),  sharedPref.getInt("hargaKupatSetGo", -1), sharedPref.getInt("hargaKupatSetGr", -1)};
+            hargaTahuToge1 = new int[]{sharedPref.getInt("hargaTahuTogeN", -1),  sharedPref.getInt("hargaTahuTogeGo", -1), sharedPref.getInt("hargaTahuTogeGr", -1)};
+            hargaTahuTogeSet = new int[]{sharedPref.getInt("hargaTahuTogeSetN", -1),  sharedPref.getInt("hargaTahuTogeSetGo", -1), sharedPref.getInt("hargaTahuTogeSetGr", -1)};
+            hargaKariAyam1 = new int[]{sharedPref.getInt("hargaKariAyam1N", -1),  sharedPref.getInt("hargaKariAyam1Go", -1), sharedPref.getInt("hargaKariAyam1Gr", -1)};
+            hargaKariAyamSet = new int[]{sharedPref.getInt("hargaKariAyamSetN", -1),  sharedPref.getInt("hargaKariAyamSetGo", -1), sharedPref.getInt("hargaKariAyamSetGr", -1)};
+            hargaKariSapi1 = new int[]{sharedPref.getInt("hargaKariSapi1N", -1),  sharedPref.getInt("hargaKariSapi1Go", -1), sharedPref.getInt("hargaKariSapi1Gr", -1)};
+            hargaKariSapiSet = new int[]{sharedPref.getInt("hargaKariSapiSetN", -1),  sharedPref.getInt("hargaKariSapiSetGo", -1), sharedPref.getInt("hargaKariSapiSetGr", -1)};
+            hargaTelur = new int[]{sharedPref.getInt("hargaTelurN", -1),  sharedPref.getInt("hargaTelurGo", -1), sharedPref.getInt("hargaTelurGr", -1)};
+            hargaKerupukM = new int[]{sharedPref.getInt("hargaKerupukMN", -1),  sharedPref.getInt("hargaKerupukMGo", -1), sharedPref.getInt("hargaKerupukMGr", -1)};
+            hargaKerupukA = new int[]{sharedPref.getInt("hargaKerupukAN", -1),  sharedPref.getInt("hargaKerupukAGo", -1), sharedPref.getInt("hargaKerupukAGr", -1)};
+            hargaEmping = new int[]{sharedPref.getInt("hargaEmpingN", -1),  sharedPref.getInt("hargaEmpingGo", -1), sharedPref.getInt("hargaEmpingGr", -1)};
+            hargaTahu = new int[]{sharedPref.getInt("hargaTahuN", -1),  sharedPref.getInt("hargaTahuGo", -1), sharedPref.getInt("hargaTahuGr", -1)};
+            hargaPeyek = new int[]{sharedPref.getInt("hargaPeyekN", -1),  sharedPref.getInt("hargaPeyekGo", -1), sharedPref.getInt("hargaPeyekGr", -1)};
+            hargaDaging = new int[]{sharedPref.getInt("hargaDagingN", -1),  sharedPref.getInt("hargaDagingGo", -1), sharedPref.getInt("hargaDagingGr", -1)};
+            hargaDagingA = new int[]{sharedPref.getInt("hargaDagingAN", -1),  sharedPref.getInt("hargaDagingAGo", -1), sharedPref.getInt("hargaDagingAGr", -1)};
+            hargaBumbu = new int[]{sharedPref.getInt("hargaBumbuN", -1),  sharedPref.getInt("hargaBumbuGo", -1), sharedPref.getInt("hargaBumbuGr", -1)};
+            hargaSaroja = new int[]{sharedPref.getInt("hargaSarojaN", -1),  sharedPref.getInt("hargaSarojaGo", -1), sharedPref.getInt("hargaSarojaGr", -1)};
+            hargaKentang = new int[]{sharedPref.getInt("hargaKentangN", -1),  sharedPref.getInt("hargaKentangGo", -1), sharedPref.getInt("hargaKentangGr", -1)};
+            hargaLontongP = new int[]{sharedPref.getInt("hargaLontongPN", -1),  sharedPref.getInt("hargaLontongPGo", -1), sharedPref.getInt("hargaLontongPGr", -1)};
+        } else {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("created", "OK");
+            hargaKupat1   =   new int[]{18000, 22500, 20000};
+            editor.putInt("hargaKupatN", 18000);
+            editor.putInt("hargaKupatGo", 22500);
+            editor.putInt("hargaKupatGr", 20000);
+            hargaKupatSet =   new int[]{14000, 17500, 15000};
+            editor.putInt("hargaKupatSetN", 14000);
+            editor.putInt("hargaKupatSetGo", 17500);
+            editor.putInt("hargaKupatSetGr", 15000);
+            hargaTahuToge1   =   new int[]{18000, 22500, 20000};
+            editor.putInt("hargaTahuTogeN", 18000);
+            editor.putInt("hargaTahuTogeGo", 22500);
+            editor.putInt("hargaTahuTogeGr", 20000);
+            hargaTahuTogeSet =   new int[]{14000, 17500, 15000};
+            editor.putInt("hargaTahuTogeSetN", 14000);
+            editor.putInt("hargaTahuTogeSetGo", 17500);
+            editor.putInt("hargaTahuTogeSetGr", 15000);
+            hargaKariAyam1    =   new int[]{21000, 26550, 23000};
+            editor.putInt("hargaKariAyam1N", 21000);
+            editor.putInt("hargaKariAyam1Go", 26550);
+            editor.putInt("hargaKariAyam1Gr", 23000);
+            hargaKariAyamSet  =   new int[]{16000, 20000, 17000};
+            editor.putInt("hargaKariAyamSetN", 16000);
+            editor.putInt("hargaKariAyamSetGo", 20000);
+            editor.putInt("hargaKariAyamSetGr", 17000);
+            hargaKariSapi1    =   new int[]{21000, 26550, 23000};
+            editor.putInt("hargaKariSapi1N", 21000);
+            editor.putInt("hargaKariSapi1Go", 26500);
+            editor.putInt("hargaKariSapi1Gr", 23000);
+            hargaKariSapiSet  =   new int[]{16000, 20000, 17000};
+            editor.putInt("hargaKariSapiSetN", 16000);
+            editor.putInt("hargaKariSapiSetGo", 20000);
+            editor.putInt("hargaKariSapiSetGr", 17000);
+            hargaTelur    =   new int[]{4000, 5000, 4500};
+            editor.putInt("hargaTelurN", 4000);
+            editor.putInt("hargaTelurGo", 5000);
+            editor.putInt("hargaTelurGr", 4500);
+            hargaKerupukM =   new int[]{1000, 1250, 2250};
+            editor.putInt("hargaKerupukMN", 1000);
+            editor.putInt("hargaKerupukMGo", 1250);
+            editor.putInt("hargaKerupukMGr", 2250);
+            hargaKerupukA =   new int[]{500, 625, 600};
+            editor.putInt("hargaKerupukAN", 500);
+            editor.putInt("hargaKerupukAGo", 625);
+            editor.putInt("hargaKerupukAGr", 600);
+            hargaEmping   =   new int[]{4000, 5000, 4500};
+            editor.putInt("hargaEmpingN", 4000);
+            editor.putInt("hargaEmpingGo", 5000);
+            editor.putInt("hargaEmpingGr", 4500);
+            hargaTahu     =    new int[]{2500, 3125, 2250};
+            editor.putInt("hargaTahuN", 2500);
+            editor.putInt("hargaTahuGo", 3125);
+            editor.putInt("hargaTahuGr", 2250);
+            hargaPeyek     =   new int[]{10000, 12500, 11000};
+            editor.putInt("hargaPeyekN", 10000);
+            editor.putInt("hargaPeyekGo", 12500);
+            editor.putInt("hargaPeyekGr", 11000);
+            hargaDaging    =   new int[]{8000, 10000, 7000};
+            editor.putInt("hargaDagingN", 8000);
+            editor.putInt("hargaDagingGo", 10000);
+            editor.putInt("hargaDagingGr", 7000);
+            hargaDagingA   =   new int[]{6000, 7500, 7000};
+            editor.putInt("hargaDagingAN", 6000);
+            editor.putInt("hargaDagingAGo", 7500);
+            editor.putInt("hargaDagingAGr", 7000);
+            hargaBumbu     =   new int[]{7000, 8750, 7000};
+            editor.putInt("hargaBumbuN", 7000);
+            editor.putInt("hargaBumbuGo", 8750);
+            editor.putInt("hargaBumbuGr", 7000);
+            hargaSaroja    =   new int[]{9000, 11250, 10000};
+            editor.putInt("hargaSarojaN", 9000);
+            editor.putInt("hargaSarojaGo", 11250);
+            editor.putInt("hargaSarojaGr", 10000);
+            hargaKentang   =   new int[]{10000, 12500, 10000};
+            editor.putInt("hargaKentangN", 10000);
+            editor.putInt("hargaKentangGo", 12500);
+            editor.putInt("hargaKentangGr", 10000);
+            hargaLontongP  =   new int[]{6000, 7500, 7500};
+            editor.putInt("hargaLontongPN", 6000);
+            editor.putInt("hargaLontongPGo", 7500);
+            editor.putInt("hargaLontongPGr", 7500);
+            editor.apply();
+        }
 
         btnPrint = (Button) findViewById(R.id.print);
         totalhargaTV = (TextView) findViewById(R.id.totalharga);
@@ -1149,16 +1257,16 @@ public class MainActivity extends AppCompatActivity
             Style rightJust = new Style().setJustification(EscPosConst.Justification.Right);
             if (nKupat != 0){escpos.writeLF(nKupat +  " x Kupat Tahu @" + hargaKupat1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKupat);}
             if (nKupatSet != 0){escpos.writeLF(nKupatSet + " x Kpt Tahu ½ @" + hargaKupatSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKupatSet);}
-            if (nTahuToge != 0){escpos.writeLF(nTahuToge +  " x Tahu Toge  @" + hargaKupat1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahuToge);}
-            if (nTahuTogeSet != 0){escpos.writeLF(nTahuTogeSet + " x Tahu Toge½ @" + hargaKupatSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahuTogeSet);}
+            if (nTahuToge != 0){escpos.writeLF(nTahuToge +  " x Tahu Toge  @" + hargaTahuToge1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahuToge);}
+            if (nTahuTogeSet != 0){escpos.writeLF(nTahuTogeSet + " x Tahu Toge½ @" + hargaTahuTogeSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahuTogeSet);}
             if (nTahu != 0){escpos.writeLF(nTahu + " x Tahu      @" + hargaTahu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahu);}
             if (nBumbu != 0){escpos.writeLF(nBumbu + " x Bumbu+++  @" + hargaBumbu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaBumbu);}
-            if (nKariAyam != 0){escpos.writeLF(nKariAyam + " x Kari Ayam  @" + hargaKari1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariAyam);}
-            if (nKariAyamSet != 0){escpos.writeLF(nKariAyamSet + " x Kari Ayam½ @" + hargaKariSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariAyamSet);}
+            if (nKariAyam != 0){escpos.writeLF(nKariAyam + " x Kari Ayam  @" + hargaKariAyam1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariAyam);}
+            if (nKariAyamSet != 0){escpos.writeLF(nKariAyamSet + " x Kari Ayam½ @" + hargaKariAyamSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariAyamSet);}
             if (nDagingA != 0){escpos.writeLF(nDagingA + " x DagingA++ @" + hargaDagingA[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaDagingA);}
 
-            if (nKariSapi != 0){escpos.writeLF(nKariSapi + " x Kari Sapi  @" + hargaKari1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariSapi);}
-            if (nKariSapiSet != 0){escpos.writeLF(nKariSapiSet + " x Kari Sapi½ @" + hargaKariSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariSapiSet);}
+            if (nKariSapi != 0){escpos.writeLF(nKariSapi + " x Kari Sapi  @" + hargaKariSapi1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariSapi);}
+            if (nKariSapiSet != 0){escpos.writeLF(nKariSapiSet + " x Kari Sapi½ @" + hargaKariSapiSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariSapiSet);}
             if (nDaging != 0){escpos.writeLF(nDaging + " x Daging++  @" + hargaDaging[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaDaging);}
 
             if (nTelur != 0){escpos.writeLF(nTelur + " x Telur      @" + hargaTelur[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTelur);}
