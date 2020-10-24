@@ -67,7 +67,6 @@
 
             </android.support.constraint.ConstraintLayout>
 
-
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/header2"
                 android:layout_width="match_parent"
@@ -236,122 +235,6 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/kariayam1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#E8E8E8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/kupatset">
-
-                <TextView
-                    android:id="@+id/kariayam1tv"
-                    android:layout_width="128dip"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:gravity="left|center_vertical|center_horizontal"
-                    android:text="Kari Ayam (1)"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.857" />
-
-                <Button
-                    android:id="@+id/kariayam1kurang"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="-"
-                    app:layout_constraintStart_toEndOf="@+id/kariayam1tv"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <Button
-                    android:id="@+id/kariayam1tambah"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="+"
-                    app:layout_constraintStart_toEndOf="@+id/kariayam1kurang"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <TextView
-                    android:id="@+id/kariayam1total"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="right|center_vertical"
-                    android:text="0 | 0"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/karisapi1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#E8E8E8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/kariayamset">
-
-                <TextView
-                    android:id="@+id/karisapi1tv"
-                    android:layout_width="128dip"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:gravity="left|center_vertical|center_horizontal"
-                    android:text="Kari Sapi (1)"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.857" />
-
-                <Button
-                    android:id="@+id/karisapi1kurang"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="-"
-                    app:layout_constraintStart_toEndOf="@+id/karisapi1tv"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <Button
-                    android:id="@+id/karisapi1tambah"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="+"
-                    app:layout_constraintStart_toEndOf="@+id/karisapi1kurang"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <TextView
-                    android:id="@+id/karisapi1total"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="right|center_vertical"
-                    android:text="0 | 0"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
                 android:id="@+id/kupatset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -394,6 +277,294 @@
 
                 <TextView
                     android:id="@+id/kupatsettotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/tahutoge1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E8E8E8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kupatset">
+
+                <TextView
+                    android:id="@+id/tahutoge1tv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="TahuToge (1)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/tahutoge1kurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/tahutoge1tv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/tahutoge1tambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/tahutoge1kurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/tahutoge1total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/tahutogeset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tahutoge1">
+
+                <TextView
+                    android:id="@+id/tahutogesettv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="Th Toge (½)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/tahutogesetkurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/tahutogesettv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/tahutogesettambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/tahutogesetkurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/tahutogesettotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/tahu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E8E8E8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tahutogeset">
+
+                <TextView
+                    android:id="@+id/tahutv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="Tahu"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/tahukurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/tahutv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/tahutambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/tahukurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/tahutotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/bumbu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tahu">
+
+                <TextView
+                    android:id="@+id/bumbutv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="Ext Bumbu"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/bumbukurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/bumbutv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/bumbutambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/bumbukurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/bumbutotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/kariayam1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E8E8E8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bumbu">
+
+                <TextView
+                    android:id="@+id/kariayam1tv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="Kari Ayam (1)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/kariayam1kurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/kariayam1tv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/kariayam1tambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/kariayam1kurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/kariayam1total"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -466,9 +637,125 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/daginga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#E7E7E7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kariayamset">
+
+                <TextView
+                    android:id="@+id/dagingatv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="Daging Ayam++"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/dagingakurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/dagingatv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/dagingatambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/dagingakurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/dagingatotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/karisapi1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/daginga">
+
+                <TextView
+                    android:id="@+id/karisapi1tv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="Kari Sapi (1)"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/karisapi1kurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/karisapi1tv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/karisapi1tambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/karisapi1kurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/karisapi1total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/karisapiset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#E8E8E8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -523,6 +810,63 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/daging"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/karisapiset">
+
+                <TextView
+                    android:id="@+id/dagingtv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="Daging Sapi++"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/dagingkurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/dagingtv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/dagingtambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/dagingkurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/dagingtotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/telur"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -530,7 +874,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/karisapiset">
+                app:layout_constraintTop_toBottomOf="@+id/daging">
 
                 <TextView
                     android:id="@+id/telurtv"
@@ -595,7 +939,7 @@
                     android:layout_height="0dp"
                     android:layout_marginStart="16dp"
                     android:gravity="left|center_vertical|center_horizontal"
-                    android:text="Kerupuk Merah (3)"
+                    android:text="Kerupuk Merah"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -753,7 +1097,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/tahu"
+                android:id="@+id/rempeyek"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E8E8E8"
@@ -761,63 +1105,6 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emping">
-
-                <TextView
-                    android:id="@+id/tahutv"
-                    android:layout_width="128dip"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:gravity="left|center_vertical|center_horizontal"
-                    android:text="Tahu"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.857" />
-
-                <Button
-                    android:id="@+id/tahukurang"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="-"
-                    app:layout_constraintStart_toEndOf="@+id/tahutv"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <Button
-                    android:id="@+id/tahutambah"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="+"
-                    app:layout_constraintStart_toEndOf="@+id/tahukurang"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <TextView
-                    android:id="@+id/tahutotal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="right|center_vertical"
-                    android:text="0 | 0"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/rempeyek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tahu">
 
                 <TextView
                     android:id="@+id/rempeyektv"
@@ -868,130 +1155,13 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/daging"
+                android:id="@+id/seroja"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E7E7E7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rempeyek">
-
-                <TextView
-                    android:id="@+id/dagingtv"
-                    android:layout_width="128dip"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:gravity="left|center_vertical|center_horizontal"
-                    android:text="Ext Daging"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.857" />
-
-                <Button
-                    android:id="@+id/dagingkurang"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="-"
-                    app:layout_constraintStart_toEndOf="@+id/dagingtv"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <Button
-                    android:id="@+id/dagingtambah"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="+"
-                    app:layout_constraintStart_toEndOf="@+id/dagingkurang"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <TextView
-                    android:id="@+id/dagingtotal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="right|center_vertical"
-                    android:text="0 | 0"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/bumbu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/daging">
-
-                <TextView
-                    android:id="@+id/bumbutv"
-                    android:layout_width="128dip"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:gravity="left|center_vertical|center_horizontal"
-                    android:text="Ext Bumbu"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.857" />
-
-                <Button
-                    android:id="@+id/bumbukurang"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="-"
-                    app:layout_constraintStart_toEndOf="@+id/bumbutv"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <Button
-                    android:id="@+id/bumbutambah"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:text="+"
-                    app:layout_constraintStart_toEndOf="@+id/bumbukurang"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <TextView
-                    android:id="@+id/bumbutotal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="right|center_vertical"
-                    android:text="0 | 0"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
-
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/seroja"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#E7E7E7"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bumbu">
 
                 <TextView
                     android:id="@+id/serojatv"
@@ -1045,6 +1215,7 @@
                 android:id="@+id/kentang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#E8E8E8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -1098,6 +1269,62 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </android.support.constraint.ConstraintLayout>
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/lontongp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kentang">
+
+                <TextView
+                    android:id="@+id/lontongptv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="Lontong ++"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/lontongpkurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/lontongptv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/lontongptambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/lontongpkurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/lontongptotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
 

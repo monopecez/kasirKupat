@@ -57,63 +57,81 @@ public class MainActivity extends AppCompatActivity
     private UUID applicationUUID = UUID
             .fromString("00001101-0000-1000-8000-00805F9B34FB");
     private ProgressDialog mBluetoothConnectProgressDialog;
-    private BluetoothSocket mBluetoothSocket;
+    private BluetoothSocket mBluetoothSocket = null;
     private EscPos escpos;
     BluetoothDevice mBluetoothDevice;
 
 
     static int priceIndex = 0;
-    static int[] hargaKupat1   =   {17000, 21250, 20000};
-    static int[] hargaKupatSet =   {13000, 16250, 15000};
-    static int[] hargaKari1    =   {20000, 25000, 23000};
-    static int[] hargaKariSet  =   {15000, 18750, 17000};
+    static int[] hargaKupat1   =   {18000, 22500, 20000};
+//    static int[] hargaKupat1   =   {18000, 22500, 20000};
+    static int[] hargaKupatSet =   {14000, 17500, 15000};
+    static int[] hargaKari1    =   {21000, 26550, 23000};
+//    static int[] hargaKari1    =   {21000, 26550, 23000};
+    static int[] hargaKariSet  =   {16000, 20000, 17000};
     static int[] hargaTelur    =   {4000, 5000, 4500};
-    static int[] hargaKerupukM =   {2000, 2500, 2250};
+    static int[] hargaKerupukM =   {1000, 1250, 2250};
     static int[] hargaKerupukA =   {500, 625, 600};
     static int[] hargaEmping   =   {4000, 5000, 4500};
-    static int[] hargaTahu     =    {2000, 2500, 2250};
+    static int[] hargaTahu     =    {2500, 3125, 2250};
     static int[] hargaPeyek     =   {10000, 12500, 11000};
-    static int[] hargaDaging    =   {6000, 7500, 7000};
-    static int[] hargaBumbu     =   {6000, 7500, 7000};
+    static int[] hargaDaging    =   {8000, 10000, 7000};
+    static int[] hargaDagingA   =   {6000, 7500, 7000};
+    static int[] hargaBumbu     =   {7000, 8750, 7000};
     static int[] hargaSaroja    =   {9000, 11250, 10000};
-    static int[] hargaKentang   =   {9000, 11250, 10000};
+    static int[] hargaKentang   =   {10000, 12500, 10000};
+    static int[] hargaLontongP  =   {6000, 7500, 7500};
 
     static int nKupat = 0;
     static int nKupatSet = 0;
+    static int nTahuToge = 0;
+    static int nTahuTogeSet = 0;
+    static int nTahu = 0;
+    static int nBumbu = 0;
+
     static int nKariAyam = 0;
     static int nKariAyamSet = 0;
+    static int nDagingA = 0;
+
     static int nKariSapi = 0;
     static int nKariSapiSet = 0;
+    static int nDaging = 0;
+
     static int nTelur = 0;
     static int nKerupukM = 0;
     static int nKerupukA = 0;
     static int nEmping = 0;
-    static int nTahu = 0;
     static int nPeyek = 0;
-    static int nDaging = 0;
-    static int nBumbu = 0;
     static int nSeroja = 0;
     static int nKentang = 0;
+    static int nLontongP = 0;
 
     static String pin_sementara = "";
 
     static int hargaTotal = 0;
     static int totalHargaKupat = 0;
     static int totalHargaKupatSet = 0;
+    static int totalHargaTahuToge = 0;
+    static int totalHargaTahuTogeSet = 0;
+    static int totalHargaTahu = 0;
+    static int totalHargaBumbu = 0;
+
     static int totalHargaKariAyam = 0;
     static int totalHargaKariAyamSet = 0;
+    static int totalHargaDagingA = 0;
+
     static int totalHargaKariSapi = 0;
     static int totalHargaKariSapiSet = 0;
+    static int totalHargaDaging = 0;
+
     static int totalHargaTelur = 0;
     static int totalHargaKerupukM = 0;
     static int totalHargaKerupukA = 0;
     static int totalHargaEmping = 0;
-    static int totalHargaTahu = 0;
     static int totalHargaPeyek = 0;
-    static int totalHargaDaging = 0;
-    static int totalHargaBumbu = 0;
     static int totalHargaSeroja = 0;
     static int totalHargaKentang = 0;
+    static int totalHargaLontongP = 0;
 
     static AlertDialog.Builder builder;
     static AlertDialog.Builder builder0;
@@ -124,20 +142,29 @@ public class MainActivity extends AppCompatActivity
     static Button btnPrint;
     static TextView kupat1total;
     static TextView kupatsettotal ;
+    static TextView tahutoge1total;
+    static TextView tahutogesettotal;
+    static TextView tahutotal;
+    static TextView bumbutotal;
+
     static TextView kariayam1total ;
     static TextView kariayamsettotal ;
+    static TextView dagingatotal;
+
     static TextView karisapi1total ;
     static TextView karisapisettotal ;
+    static TextView dagingtotal;
+
     static TextView telurtotal ;
     static TextView kerupukmerahtotal;
     static TextView kerupukacitotal;
     static TextView empingtotal;
-    static TextView tahutotal;
     static TextView peyektotal;
-    static TextView dagingtotal;
-    static TextView bumbutotal;
     static TextView serojatotal;
     static TextView kentangtotal;
+    static TextView lontongptotal;
+
+
     static TextView totalhargaTV;
 
 
@@ -151,33 +178,56 @@ public class MainActivity extends AppCompatActivity
     static void calculatePrice(int priceIndex){
         totalHargaKupat = hargaKupat1[priceIndex] * nKupat;
         kupat1total.setText(nKupat + " | " + totalHargaKupat);
+
         totalHargaKupatSet = hargaKupatSet[priceIndex] * nKupatSet;
         kupatsettotal.setText(nKupatSet + " | " + totalHargaKupatSet);
-        totalHargaKariAyam = hargaKari1[priceIndex] * nKariAyam;
-        kariayam1total.setText(nKariAyam + " | " + totalHargaKariAyam);
-        totalHargaKariAyamSet = hargaKariSet[priceIndex] * nKariAyamSet;
-        kariayamsettotal.setText(nKariAyamSet + " | " + totalHargaKariAyamSet);
-        totalHargaKariSapi = hargaKari1[priceIndex] * nKariSapi;
-        karisapi1total.setText(nKariSapi + " | " + totalHargaKariSapi);
-        totalHargaKariSapiSet = hargaKariSet[priceIndex] * nKariSapiSet;
-        karisapisettotal.setText(nKariSapiSet + " | " + totalHargaKariSapiSet);
-        totalHargaTelur = hargaTelur[priceIndex] * nTelur;
-        telurtotal.setText(nTelur + " | " + totalHargaTelur);
-        totalHargaKerupukM = hargaKerupukM[priceIndex] * nKerupukM;
-        kerupukmerahtotal.setText(nKerupukM + " | " + totalHargaKerupukM);
-        totalHargaKerupukA = hargaKerupukA[priceIndex] * nKerupukA;
-        kerupukacitotal.setText(nKerupukA + " | " + totalHargaKerupukA);
-        totalHargaEmping = hargaEmping[priceIndex] * nEmping;
-        empingtotal.setText(nEmping + " | " + totalHargaEmping);
+
+        totalHargaTahuToge = hargaKupat1[priceIndex] * nTahuToge;
+        tahutoge1total.setText(nTahuToge + " | " + totalHargaTahuToge);
+
+        totalHargaTahuTogeSet = hargaKupatSet[priceIndex] * nTahuTogeSet;
+        tahutogesettotal.setText(nTahuTogeSet + " | " + totalHargaTahuTogeSet);
+
         totalHargaTahu = hargaTahu[priceIndex] * nTahu;
         tahutotal.setText(nTahu + " | " + totalHargaTahu);
-        totalHargaPeyek = hargaPeyek[priceIndex] * nPeyek;
-        peyektotal.setText(nPeyek + " | " + totalHargaPeyek);
-        totalHargaDaging = hargaDaging[priceIndex] * nDaging;
-        dagingtotal.setText(nDaging + " | " + totalHargaDaging);
 
         totalHargaBumbu = hargaBumbu[priceIndex] * nBumbu;
         bumbutotal.setText(nBumbu + " | " + totalHargaBumbu);
+
+        totalHargaKariAyam = hargaKari1[priceIndex] * nKariAyam;
+        kariayam1total.setText(nKariAyam + " | " + totalHargaKariAyam);
+
+        totalHargaKariAyamSet = hargaKariSet[priceIndex] * nKariAyamSet;
+        kariayamsettotal.setText(nKariAyamSet + " | " + totalHargaKariAyamSet);
+
+        totalHargaDagingA = hargaDagingA[priceIndex] * nDagingA;
+        dagingatotal.setText(nDagingA + " | " + totalHargaDagingA);
+
+
+        totalHargaKariSapi = hargaKari1[priceIndex] * nKariSapi;
+        karisapi1total.setText(nKariSapi + " | " + totalHargaKariSapi);
+
+        totalHargaKariSapiSet = hargaKariSet[priceIndex] * nKariSapiSet;
+        karisapisettotal.setText(nKariSapiSet + " | " + totalHargaKariSapiSet);
+
+        totalHargaDaging = hargaDaging[priceIndex] * nDaging;
+        dagingtotal.setText(nDaging + " | " + totalHargaDaging);
+
+
+        totalHargaTelur = hargaTelur[priceIndex] * nTelur;
+        telurtotal.setText(nTelur + " | " + totalHargaTelur);
+
+        totalHargaKerupukM = hargaKerupukM[priceIndex] * nKerupukM;
+        kerupukmerahtotal.setText(nKerupukM + " | " + totalHargaKerupukM);
+
+        totalHargaKerupukA = hargaKerupukA[priceIndex] * nKerupukA;
+        kerupukacitotal.setText(nKerupukA + " | " + totalHargaKerupukA);
+
+        totalHargaEmping = hargaEmping[priceIndex] * nEmping;
+        empingtotal.setText(nEmping + " | " + totalHargaEmping);
+
+        totalHargaPeyek = hargaPeyek[priceIndex] * nPeyek;
+        peyektotal.setText(nPeyek + " | " + totalHargaPeyek);
 
         totalHargaSeroja = hargaSaroja[priceIndex] * nSeroja;
         serojatotal.setText(nSeroja + " | " + totalHargaSeroja);
@@ -185,12 +235,14 @@ public class MainActivity extends AppCompatActivity
         totalHargaKentang = hargaKentang[priceIndex] * nKentang;
         kentangtotal.setText(nKentang + " | " + totalHargaKentang);
 
+        totalHargaLontongP = hargaLontongP[priceIndex] * nLontongP;
+        lontongptotal.setText(nLontongP + " | " + totalHargaLontongP);
 
-
-        hargaTotal = totalHargaKupat + totalHargaKupatSet + totalHargaKariAyam + totalHargaKariAyamSet +
-                totalHargaKariSapi + totalHargaKariSapiSet + totalHargaTelur + totalHargaKerupukM + totalHargaKerupukA + totalHargaEmping+
-        totalHargaTahu + totalHargaPeyek + totalHargaDaging +
-        totalHargaBumbu + totalHargaSeroja + totalHargaKentang;
+        hargaTotal = totalHargaKupat + totalHargaKupatSet + totalHargaTahuToge + totalHargaTahuTogeSet + totalHargaTahu + totalHargaBumbu +
+                totalHargaKariAyam + totalHargaKariAyamSet + totalHargaDagingA +
+                totalHargaKariSapi + totalHargaKariSapiSet + totalHargaDaging +
+                totalHargaTelur + totalHargaKerupukM + totalHargaKerupukA + totalHargaEmping +
+                totalHargaPeyek + totalHargaSeroja + totalHargaKentang + totalHargaLontongP;
         totalhargaTV.setText("" + hargaTotal);
 
     }
@@ -215,59 +267,90 @@ public class MainActivity extends AppCompatActivity
 
         btnPrint = (Button) findViewById(R.id.print);
         totalhargaTV = (TextView) findViewById(R.id.totalharga);
+
         Button kupat1kurang = (Button) findViewById(R.id.kupat1kurang);
         Button kupat1tambah = (Button) findViewById(R.id.kupat1tambah);
         kupat1total = (TextView) findViewById(R.id.kupat1total) ;
+
         Button kupatsetkurang = (Button) findViewById(R.id.kupatsetkurang);
         Button kupatsettambah = (Button) findViewById(R.id.kupatsettambah);
         kupatsettotal = (TextView) findViewById(R.id.kupatsettotal);
-        Button kariayam1tambah = (Button) findViewById(R.id.kariayam1tambah);
-        Button kariayam1kurang = (Button) findViewById(R.id.kariayam1kurang);
-        kariayam1total = (TextView) findViewById(R.id.kariayam1total);
-        Button karisapi1tambah = (Button) findViewById(R.id.karisapi1tambah);
-        Button karisapi1kurang = (Button) findViewById(R.id.karisapi1kurang);
-        karisapi1total = (TextView) findViewById(R.id.karisapi1total);
-        Button kariayamsettambah = (Button) findViewById(R.id.kariayamsettambah);
-        Button kariayamsetkurang = (Button) findViewById(R.id.kariayamsetkurang);
-        kariayamsettotal = (TextView) findViewById(R.id.kariayamsettotal);
-        Button karisapisettambah = (Button) findViewById(R.id.karisapisettambah);
-        Button karisapisetkurang = (Button) findViewById(R.id.karisapisetkurang);
-        karisapisettotal = (TextView) findViewById(R.id.karisapisettotal);
-        Button telurtambah = (Button) findViewById(R.id.telurtambah);
-        Button telurkurang = (Button) findViewById(R.id.telurkurang);
-        telurtotal = (TextView) findViewById(R.id.telurtotal);
-        Button kerupukmerahtambah = (Button) findViewById(R.id.kerupukmerahtambah);
-        Button kerupukmerahkurang = (Button) findViewById(R.id.kerupukmerahkurang);
-        kerupukmerahtotal = (TextView) findViewById(R.id.kerupukmerahtotal);
-        Button kerupukacitambah = (Button) findViewById(R.id.kerupukacitambah);
-        Button kerupukacikurang = (Button) findViewById(R.id.kerupukacikurang);
-        kerupukacitotal = (TextView) findViewById(R.id.kerupukacitotal);
-        Button empingtambah = (Button) findViewById(R.id.empingtambah);
-        Button empingkurang = (Button) findViewById(R.id.empingkurang);
-        empingtotal = (TextView) findViewById(R.id.empingtotal);
+
+        Button tahutoge1kurang = (Button) findViewById(R.id.tahutoge1kurang);
+        Button tahutoge1tambah = (Button) findViewById(R.id.tahutoge1tambah);
+        tahutoge1total = (TextView) findViewById(R.id.tahutoge1total) ;
+
+        Button tahutogesetkurang = (Button) findViewById(R.id.tahutogesetkurang);
+        Button tahutogesettambah = (Button) findViewById(R.id.tahutogesettambah);
+        tahutogesettotal = (TextView) findViewById(R.id.tahutogesettotal);
+
         Button tahutambah = (Button) findViewById(R.id.tahutambah);
         Button tahukurang = (Button) findViewById(R.id.tahukurang);
         tahutotal = (TextView) findViewById(R.id.tahutotal);
-        Button peyektambah = (Button) findViewById(R.id.rempeyektambah);
-        Button peyekkurang = (Button) findViewById(R.id.rempeyekkurang);
-        peyektotal = (TextView) findViewById(R.id.rempeyektotal);
-        Button dagingtambah = (Button) findViewById(R.id.dagingtambah);
-        Button dagingkurang = (Button) findViewById(R.id.dagingkurang);
-        dagingtotal = (TextView) findViewById(R.id.dagingtotal);
-
-        Button serojatambah = (Button) findViewById(R.id.serojatambah);
-        Button serojakurang = (Button) findViewById(R.id.serojakurang);
-        serojatotal = (TextView) findViewById(R.id.serojatotal);
 
         Button bumbutambah = (Button) findViewById(R.id.bumbutambah);
         Button bumbukurang = (Button) findViewById(R.id.bumbukurang);
         bumbutotal = (TextView) findViewById(R.id.bumbutotal);
 
+
+
+        Button kariayam1tambah = (Button) findViewById(R.id.kariayam1tambah);
+        Button kariayam1kurang = (Button) findViewById(R.id.kariayam1kurang);
+        kariayam1total = (TextView) findViewById(R.id.kariayam1total);
+
+        Button kariayamsettambah = (Button) findViewById(R.id.kariayamsettambah);
+        Button kariayamsetkurang = (Button) findViewById(R.id.kariayamsetkurang);
+        kariayamsettotal = (TextView) findViewById(R.id.kariayamsettotal);
+
+        Button dagingatambah = (Button) findViewById(R.id.dagingatambah);
+        Button dagingakurang = (Button) findViewById(R.id.dagingakurang);
+        dagingatotal = (TextView) findViewById(R.id.dagingatotal);
+
+
+        Button karisapi1tambah = (Button) findViewById(R.id.karisapi1tambah);
+        Button karisapi1kurang = (Button) findViewById(R.id.karisapi1kurang);
+        karisapi1total = (TextView) findViewById(R.id.karisapi1total);
+
+        Button karisapisettambah = (Button) findViewById(R.id.karisapisettambah);
+        Button karisapisetkurang = (Button) findViewById(R.id.karisapisetkurang);
+        karisapisettotal = (TextView) findViewById(R.id.karisapisettotal);
+
+        Button dagingtambah = (Button) findViewById(R.id.dagingtambah);
+        Button dagingkurang = (Button) findViewById(R.id.dagingkurang);
+        dagingtotal = (TextView) findViewById(R.id.dagingtotal);
+
+
+        Button telurtambah = (Button) findViewById(R.id.telurtambah);
+        Button telurkurang = (Button) findViewById(R.id.telurkurang);
+        telurtotal = (TextView) findViewById(R.id.telurtotal);
+
+        Button kerupukmerahtambah = (Button) findViewById(R.id.kerupukmerahtambah);
+        Button kerupukmerahkurang = (Button) findViewById(R.id.kerupukmerahkurang);
+        kerupukmerahtotal = (TextView) findViewById(R.id.kerupukmerahtotal);
+
+        Button kerupukacitambah = (Button) findViewById(R.id.kerupukacitambah);
+        Button kerupukacikurang = (Button) findViewById(R.id.kerupukacikurang);
+        kerupukacitotal = (TextView) findViewById(R.id.kerupukacitotal);
+
+        Button empingtambah = (Button) findViewById(R.id.empingtambah);
+        Button empingkurang = (Button) findViewById(R.id.empingkurang);
+        empingtotal = (TextView) findViewById(R.id.empingtotal);
+
+        Button peyektambah = (Button) findViewById(R.id.rempeyektambah);
+        Button peyekkurang = (Button) findViewById(R.id.rempeyekkurang);
+        peyektotal = (TextView) findViewById(R.id.rempeyektotal);
+
+        Button serojatambah = (Button) findViewById(R.id.serojatambah);
+        Button serojakurang = (Button) findViewById(R.id.serojakurang);
+        serojatotal = (TextView) findViewById(R.id.serojatotal);
+
         Button kentangtambah = (Button) findViewById(R.id.kentangtambah);
         Button kentangkurang = (Button) findViewById(R.id.kentangkurang);
         kentangtotal = (TextView) findViewById(R.id.kentangtotal);
 
-
+        Button lontongptambah = (Button) findViewById(R.id.lontongptambah);
+        Button lontongpkurang = (Button) findViewById(R.id.lontongpkurang);
+        lontongptotal = (TextView) findViewById(R.id.lontongptotal);
 
         gojekpemesan = (EditText) findViewById(R.id.gojekpemesan);
         gojekpin = (EditText) findViewById(R.id.gojekpin);
@@ -371,6 +454,45 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+        tahutoge1tambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nTahuToge += 1;
+                calculatePrice(priceIndex);
+            }
+        });
+
+        tahutoge1kurang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nTahuToge -= 1;
+                if (nTahuToge < 0){
+                    nTahuToge = 0;
+                }
+                calculatePrice(priceIndex);
+            }
+        });
+
+
+        tahutogesettambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nTahuTogeSet += 1;
+                calculatePrice(priceIndex);
+            }
+        });
+
+        tahutogesetkurang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nTahuTogeSet -= 1;
+                if (nTahuTogeSet < 0){
+                    nTahuTogeSet = 0;
+                }
+                calculatePrice(priceIndex);
+            }
+        });
+
         kariayam1tambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -390,8 +512,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
-
         kariayamsettambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -406,6 +526,25 @@ public class MainActivity extends AppCompatActivity
                 nKariAyamSet -= 1;
                 if (nKariAyamSet < 0){
                     nKariAyamSet= 0;
+                }
+                calculatePrice(priceIndex);
+            }
+        });
+
+        dagingatambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nDagingA += 1;
+                calculatePrice(priceIndex);
+            }
+        });
+
+        dagingakurang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nDagingA -= 1;
+                if (nDagingA < 0){
+                    nDagingA = 0;
                 }
                 calculatePrice(priceIndex);
             }
@@ -647,6 +786,25 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        lontongptambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nLontongP += 1;
+                calculatePrice(priceIndex);
+            }
+        });
+
+        lontongpkurang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nLontongP -= 1;
+                if (nLontongP < 0){
+                    nLontongP = 0;
+                }
+                calculatePrice(priceIndex);
+            }
+        });
+
 
 
         btnPrint.setOnClickListener(new View.OnClickListener() {
@@ -783,7 +941,7 @@ public class MainActivity extends AppCompatActivity
     public void ScanBluetooth(){
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
-            Toast.makeText(MainActivity.this, "Message1", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Message1", Toast.LENGTH_SHORT).show();
         } else {
             if (!mBluetoothAdapter.isEnabled()) {
                 Intent enableBtIntent = new Intent(
@@ -835,8 +993,11 @@ public class MainActivity extends AppCompatActivity
     public void clearContent(){
         nKupat = 0;
         nKupatSet = 0;
+        nTahuToge = 0;
+        nTahuTogeSet =0;
         nKariAyam = 0;
         nKariAyamSet = 0;
+        nDagingA = 0;
         nKariSapi = 0;
         nKariSapiSet = 0;
         nTelur = 0;
@@ -849,6 +1010,7 @@ public class MainActivity extends AppCompatActivity
         nBumbu = 0;
         nSeroja = 0;
         nKentang = 0;
+        nLontongP = 0;
         gojekpemesan.setText("");
         gojekpin.setText("");
         gojekantrian.setText("");
@@ -970,11 +1132,15 @@ public class MainActivity extends AppCompatActivity
         };
         t.start();
         t.join();
+        clearContent();
+
+        /*
         if (gojekSwitch.isChecked()){
             builder.show();
         } else {
             clearContent();
         }
+        */
         return true;
     }}
 
@@ -983,29 +1149,33 @@ public class MainActivity extends AppCompatActivity
             Style rightJust = new Style().setJustification(EscPosConst.Justification.Right);
             if (nKupat != 0){escpos.writeLF(nKupat +  " x Kupat Tahu @" + hargaKupat1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKupat);}
             if (nKupatSet != 0){escpos.writeLF(nKupatSet + " x Kpt Tahu ½ @" + hargaKupatSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKupatSet);}
+            if (nTahuToge != 0){escpos.writeLF(nTahuToge +  " x Tahu Toge  @" + hargaKupat1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahuToge);}
+            if (nTahuTogeSet != 0){escpos.writeLF(nTahuTogeSet + " x Tahu Toge½ @" + hargaKupatSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahuTogeSet);}
+            if (nTahu != 0){escpos.writeLF(nTahu + " x Tahu      @" + hargaTahu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahu);}
+            if (nBumbu != 0){escpos.writeLF(nBumbu + " x Bumbu+++  @" + hargaBumbu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaBumbu);}
             if (nKariAyam != 0){escpos.writeLF(nKariAyam + " x Kari Ayam  @" + hargaKari1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariAyam);}
             if (nKariAyamSet != 0){escpos.writeLF(nKariAyamSet + " x Kari Ayam½ @" + hargaKariSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariAyamSet);}
+            if (nDagingA != 0){escpos.writeLF(nDagingA + " x DagingA++ @" + hargaDagingA[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaDagingA);}
+
             if (nKariSapi != 0){escpos.writeLF(nKariSapi + " x Kari Sapi  @" + hargaKari1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariSapi);}
             if (nKariSapiSet != 0){escpos.writeLF(nKariSapiSet + " x Kari Sapi½ @" + hargaKariSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariSapiSet);}
+            if (nDaging != 0){escpos.writeLF(nDaging + " x Daging++  @" + hargaDaging[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaDaging);}
+
             if (nTelur != 0){escpos.writeLF(nTelur + " x Telur      @" + hargaTelur[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTelur);}
             if (nKerupukM != 0){escpos.writeLF(nKerupukM + " x Kerupuk M  @" + hargaKerupukM[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKerupukM);}
             if (nKerupukA != 0){escpos.writeLF(nKerupukA + " x Kerupuk A  @" + hargaKerupukA[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKerupukA);}
             if (nEmping != 0){escpos.writeLF(nEmping + " x Emping    @" + hargaEmping[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaEmping);}
-            if (nTahu != 0){escpos.writeLF(nTahu + " x Tahu      @" + hargaTahu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahu);}
             if (nPeyek != 0){escpos.writeLF(nPeyek + " x Rempeyek  @" + hargaPeyek[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaPeyek);}
-            if (nDaging != 0){escpos.writeLF(nDaging + " x Daging++  @" + hargaDaging[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaDaging);}
-            if (nBumbu != 0){escpos.writeLF(nBumbu + " x Bumbu+++  @" + hargaBumbu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaBumbu);}
             if (nSeroja != 0){escpos.writeLF(nSeroja + " x Seroja    @" + hargaSaroja[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaSeroja);}
             if (nKentang != 0){escpos.writeLF(nKentang + " x Mustopa   @" + hargaKentang[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKentang);}
-
-
+            if (nLontongP != 0){escpos.writeLF(nLontongP + " x Lontong++ @" + hargaLontongP[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaLontongP);}
 
             if(first) escpos.writeLF(rightJust, "Total: " + hargaTotal);
         }
     }
 
     public void dialogInputPIN(){
-        if (gojekSwitch.isChecked() || grabSwitch.isChecked()) {
+        if ((gojekSwitch.isChecked() || grabSwitch.isChecked()) && !(mBluetoothSocket == null)) {
             builder0 = new AlertDialog.Builder(this);
             LinearLayout ll_alert_layout = new LinearLayout(this);
             ll_alert_layout.setOrientation(LinearLayout.VERTICAL);
@@ -1020,7 +1190,7 @@ public class MainActivity extends AppCompatActivity
                         public void onClick(DialogInterface dialog, int id) {
                             try {
                                 pin_sementara = ed_input.getText().toString();
-                                PrintReceipt();
+                                if (!(PrintReceipt())){PrintReceipt();}
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -1028,15 +1198,14 @@ public class MainActivity extends AppCompatActivity
                     })
                     .setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            clearContent();
+                            //clearContent();
                         }
                     });
             builder0.show();
         }
         else {
-
-                                try {
-            PrintReceipt();
+            try {
+            if (!(PrintReceipt())){PrintReceipt();};
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
