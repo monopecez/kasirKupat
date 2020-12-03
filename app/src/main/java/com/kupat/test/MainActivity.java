@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity
     int[] hargaSaroja    ;
     int[] hargaKentang   ;
     int[] hargaLontongP  ;
+    int[] hargaSeblak;
 
     static int nKupat = 0;
     static int nKupatSet = 0;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity
     static int nSeroja = 0;
     static int nKentang = 0;
     static int nLontongP = 0;
+    static int nSeblak =  0;
 
     static String pin_sementara = "";
 
@@ -136,6 +138,7 @@ public class MainActivity extends AppCompatActivity
     static int totalHargaSeroja = 0;
     static int totalHargaKentang = 0;
     static int totalHargaLontongP = 0;
+    static int totalHargaSeblak = 0;
 
     static AlertDialog.Builder builder;
     static AlertDialog.Builder builder0;
@@ -167,6 +170,7 @@ public class MainActivity extends AppCompatActivity
     static TextView serojatotal;
     static TextView kentangtotal;
     static TextView lontongptotal;
+    static TextView seblaktotal;
 
     static TextView totalhargaTV;
 
@@ -238,11 +242,15 @@ public class MainActivity extends AppCompatActivity
         totalHargaLontongP = hargaLontongP[priceIndex] * nLontongP;
         lontongptotal.setText(nLontongP + " | " + totalHargaLontongP);
 
+        totalHargaSeblak = hargaSeblak[priceIndex] * nSeblak;
+        seblaktotal.setText(nSeblak + " | " + totalHargaSeblak);
+
+
         hargaTotal = totalHargaKupat + totalHargaKupatSet + totalHargaTahuToge + totalHargaTahuTogeSet + totalHargaTahu + totalHargaBumbu +
                 totalHargaKariAyam + totalHargaKariAyamSet + totalHargaDagingA +
                 totalHargaKariSapi + totalHargaKariSapiSet + totalHargaDaging +
                 totalHargaTelur + totalHargaKerupukM + totalHargaKerupukA + totalHargaEmping +
-                totalHargaPeyek + totalHargaSeroja + totalHargaKentang + totalHargaLontongP;
+                totalHargaPeyek + totalHargaSeroja + totalHargaKentang + totalHargaLontongP + totalHargaSeblak;
         totalhargaTV.setText("" + hargaTotal);
 
     }
@@ -287,6 +295,7 @@ public class MainActivity extends AppCompatActivity
             hargaSaroja = new int[]{sharedPref.getInt("hargaSarojaN", -1),  sharedPref.getInt("hargaSarojaGo", -1), sharedPref.getInt("hargaSarojaGr", -1)};
             hargaKentang = new int[]{sharedPref.getInt("hargaKentangN", -1),  sharedPref.getInt("hargaKentangGo", -1), sharedPref.getInt("hargaKentangGr", -1)};
             hargaLontongP = new int[]{sharedPref.getInt("hargaLontongPN", -1),  sharedPref.getInt("hargaLontongPGo", -1), sharedPref.getInt("hargaLontongPGr", -1)};
+            hargaSeblak = new int[]{sharedPref.getInt("hargaSeblakN", -1), sharedPref.getInt("hargaSeblakGo", -1), sharedPref.getInt("hargaSeblakGr", -1)};
         } else {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("created", "OK");
@@ -370,6 +379,11 @@ public class MainActivity extends AppCompatActivity
             editor.putInt("hargaLontongPN", 6000);
             editor.putInt("hargaLontongPGo", 7500);
             editor.putInt("hargaLontongPGr", 7500);
+
+            hargaSeblak = new int[]{6000, 7500, 7500};
+            editor.putInt("hargaSeblakN", 6000);
+            editor.putInt("hargaSeblakGo", 7500);
+            editor.putInt("hargaSeblakGr", 7500);
             editor.apply();
         }
 
@@ -459,6 +473,11 @@ public class MainActivity extends AppCompatActivity
         Button lontongptambah = (Button) findViewById(R.id.lontongptambah);
         Button lontongpkurang = (Button) findViewById(R.id.lontongpkurang);
         lontongptotal = (TextView) findViewById(R.id.lontongptotal);
+
+        Button seblaktambah = (Button) findViewById(R.id.seblaktambah);
+        Button seblakkurang = (Button) findViewById(R.id.seblakkurang);
+        seblaktotal = (TextView) findViewById(R.id.seblaktotal);
+
 
         gojekpemesan = (EditText) findViewById(R.id.gojekpemesan);
         gojekpin = (EditText) findViewById(R.id.gojekpin);
@@ -913,7 +932,24 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        seblaktambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nSeblak += 1;
+                calculatePrice(priceIndex);
+            }
+        });
 
+        seblakkurang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nSeblak -= 1;
+                if (nSeblak < 0){
+                    nSeblak = 0;
+                }
+                calculatePrice(priceIndex);
+            }
+        });
 
         btnPrint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1119,6 +1155,7 @@ public class MainActivity extends AppCompatActivity
         nSeroja = 0;
         nKentang = 0;
         nLontongP = 0;
+        nSeblak = 0;
         gojekpemesan.setText("");
         gojekpin.setText("");
         gojekantrian.setText("");
@@ -1277,6 +1314,7 @@ public class MainActivity extends AppCompatActivity
             if (nSeroja != 0){escpos.writeLF(nSeroja + " x Seroja    @" + hargaSaroja[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaSeroja);}
             if (nKentang != 0){escpos.writeLF(nKentang + " x Mustopa   @" + hargaKentang[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKentang);}
             if (nLontongP != 0){escpos.writeLF(nLontongP + " x Lontong++ @" + hargaLontongP[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaLontongP);}
+            if (nSeblak != 0){escpos.writeLF(nSeblak +     " x Seblak    @" + hargaSeblak[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaSeblak);}
 
             if(first) escpos.writeLF(rightJust, "Total: " + hargaTotal);
         }
