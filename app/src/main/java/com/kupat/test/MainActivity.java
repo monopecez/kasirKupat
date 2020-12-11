@@ -315,15 +315,15 @@ public class MainActivity extends AppCompatActivity
             editor.putInt("hargaTahuTogeSetN", 14000);
             editor.putInt("hargaTahuTogeSetGo", 17500);
             editor.putInt("hargaTahuTogeSetGr", 15000);
-            hargaKariAyam1    =   new int[]{21000, 26550, 23000};
+            hargaKariAyam1    =   new int[]{21000, 26500, 23000};
             editor.putInt("hargaKariAyam1N", 21000);
-            editor.putInt("hargaKariAyam1Go", 26550);
+            editor.putInt("hargaKariAyam1Go", 26500);
             editor.putInt("hargaKariAyam1Gr", 23000);
             hargaKariAyamSet  =   new int[]{16000, 20000, 17000};
             editor.putInt("hargaKariAyamSetN", 16000);
             editor.putInt("hargaKariAyamSetGo", 20000);
             editor.putInt("hargaKariAyamSetGr", 17000);
-            hargaKariSapi1    =   new int[]{21000, 26550, 23000};
+            hargaKariSapi1    =   new int[]{21000, 26500, 23000};
             editor.putInt("hargaKariSapi1N", 21000);
             editor.putInt("hargaKariSapi1Go", 26500);
             editor.putInt("hargaKariSapi1Gr", 23000);
