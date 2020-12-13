@@ -46,6 +46,10 @@ import com.github.anastaciocintra.escpos.EscPos;
 import com.github.anastaciocintra.escpos.EscPosConst;
 import com.github.anastaciocintra.escpos.Style;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Runnable {
 
@@ -297,94 +301,8 @@ public class MainActivity extends AppCompatActivity
             hargaLontongP = new int[]{sharedPref.getInt("hargaLontongPN", -1),  sharedPref.getInt("hargaLontongPGo", -1), sharedPref.getInt("hargaLontongPGr", -1)};
             hargaSeblak = new int[]{sharedPref.getInt("hargaSeblakN", -1), sharedPref.getInt("hargaSeblakGo", -1), sharedPref.getInt("hargaSeblakGr", -1)};
         } else {
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("created", "OK");
-            hargaKupat1   =   new int[]{18000, 22500, 20000};
-            editor.putInt("hargaKupatN", 18000);
-            editor.putInt("hargaKupatGo", 22500);
-            editor.putInt("hargaKupatGr", 20000);
-            hargaKupatSet =   new int[]{14000, 17500, 15000};
-            editor.putInt("hargaKupatSetN", 14000);
-            editor.putInt("hargaKupatSetGo", 17500);
-            editor.putInt("hargaKupatSetGr", 15000);
-            hargaTahuToge1   =   new int[]{18000, 22500, 20000};
-            editor.putInt("hargaTahuTogeN", 18000);
-            editor.putInt("hargaTahuTogeGo", 22500);
-            editor.putInt("hargaTahuTogeGr", 20000);
-            hargaTahuTogeSet =   new int[]{14000, 17500, 15000};
-            editor.putInt("hargaTahuTogeSetN", 14000);
-            editor.putInt("hargaTahuTogeSetGo", 17500);
-            editor.putInt("hargaTahuTogeSetGr", 15000);
-            hargaKariAyam1    =   new int[]{21000, 26500, 23000};
-            editor.putInt("hargaKariAyam1N", 21000);
-            editor.putInt("hargaKariAyam1Go", 26500);
-            editor.putInt("hargaKariAyam1Gr", 23000);
-            hargaKariAyamSet  =   new int[]{16000, 20000, 17000};
-            editor.putInt("hargaKariAyamSetN", 16000);
-            editor.putInt("hargaKariAyamSetGo", 20000);
-            editor.putInt("hargaKariAyamSetGr", 17000);
-            hargaKariSapi1    =   new int[]{21000, 26500, 23000};
-            editor.putInt("hargaKariSapi1N", 21000);
-            editor.putInt("hargaKariSapi1Go", 26500);
-            editor.putInt("hargaKariSapi1Gr", 23000);
-            hargaKariSapiSet  =   new int[]{16000, 20000, 17000};
-            editor.putInt("hargaKariSapiSetN", 16000);
-            editor.putInt("hargaKariSapiSetGo", 20000);
-            editor.putInt("hargaKariSapiSetGr", 17000);
-            hargaTelur    =   new int[]{4000, 5000, 4500};
-            editor.putInt("hargaTelurN", 4000);
-            editor.putInt("hargaTelurGo", 5000);
-            editor.putInt("hargaTelurGr", 4500);
-            hargaKerupukM =   new int[]{1000, 1250, 2250};
-            editor.putInt("hargaKerupukMN", 1000);
-            editor.putInt("hargaKerupukMGo", 1250);
-            editor.putInt("hargaKerupukMGr", 2250);
-            hargaKerupukA =   new int[]{500, 625, 600};
-            editor.putInt("hargaKerupukAN", 500);
-            editor.putInt("hargaKerupukAGo", 625);
-            editor.putInt("hargaKerupukAGr", 600);
-            hargaEmping   =   new int[]{4000, 5000, 4500};
-            editor.putInt("hargaEmpingN", 4000);
-            editor.putInt("hargaEmpingGo", 5000);
-            editor.putInt("hargaEmpingGr", 4500);
-            hargaTahu     =    new int[]{2500, 3125, 2250};
-            editor.putInt("hargaTahuN", 2500);
-            editor.putInt("hargaTahuGo", 3125);
-            editor.putInt("hargaTahuGr", 2250);
-            hargaPeyek     =   new int[]{10000, 12500, 11000};
-            editor.putInt("hargaPeyekN", 10000);
-            editor.putInt("hargaPeyekGo", 12500);
-            editor.putInt("hargaPeyekGr", 11000);
-            hargaDaging    =   new int[]{8000, 10000, 7000};
-            editor.putInt("hargaDagingN", 8000);
-            editor.putInt("hargaDagingGo", 10000);
-            editor.putInt("hargaDagingGr", 7000);
-            hargaDagingA   =   new int[]{6000, 7500, 7000};
-            editor.putInt("hargaDagingAN", 6000);
-            editor.putInt("hargaDagingAGo", 7500);
-            editor.putInt("hargaDagingAGr", 7000);
-            hargaBumbu     =   new int[]{7000, 8750, 7000};
-            editor.putInt("hargaBumbuN", 7000);
-            editor.putInt("hargaBumbuGo", 8750);
-            editor.putInt("hargaBumbuGr", 7000);
-            hargaSaroja    =   new int[]{9000, 11250, 10000};
-            editor.putInt("hargaSarojaN", 9000);
-            editor.putInt("hargaSarojaGo", 11250);
-            editor.putInt("hargaSarojaGr", 10000);
-            hargaKentang   =   new int[]{10000, 12500, 10000};
-            editor.putInt("hargaKentangN", 10000);
-            editor.putInt("hargaKentangGo", 12500);
-            editor.putInt("hargaKentangGr", 10000);
-            hargaLontongP  =   new int[]{6000, 7500, 7500};
-            editor.putInt("hargaLontongPN", 6000);
-            editor.putInt("hargaLontongPGo", 7500);
-            editor.putInt("hargaLontongPGr", 7500);
-
-            hargaSeblak = new int[]{6000, 7500, 7500};
-            editor.putInt("hargaSeblakN", 6000);
-            editor.putInt("hargaSeblakGo", 7500);
-            editor.putInt("hargaSeblakGr", 7500);
-            editor.apply();
+            String jsonString = "{\"hargaKupat1\":[18000,22500,20000],\"hargaKupatSet\":[14000,17500,15000],\"hargaTahuToge1\":[18000,22500,20000],\"hargaTahuTogeSet\":[14000,17500,15000],\"hargaKariAyam1\":[21000,26500,23000],\"hargaKariAyamSet\":[16000,20000,17000],\"hargaKariSapi1\":[21000,26500,23000],\"hargaKariSapiSet\":[16000,20000,17000],\"hargaTelur\":[4000,5000,4500],\"hargaKerupukM\":[1000,1250,2250],\"hargaKerupukA\":[500,625,600],\"hargaEmping\":[4000,5000,4500],\"hargaTahu\":[2500,3125,2250],\"hargaPeyek\":[10000,12500,11000],\"hargaDaging\":[8000,10000,7000],\"hargaDagingA\":[6000,7500,7000],\"hargaBumbu\":[7000,8750,7000],\"hargaSaroja\":[9000,11250,10000],\"hargaKentang\":[10000,12500,10000],\"hargaLontongP\":[6000,7500,7500],\"hargaSeblak\":[6000,7500,7500]}";
+            parseJson(jsonString);
         }
 
         btnPrint = (Button) findViewById(R.id.print);
@@ -1357,5 +1275,146 @@ public class MainActivity extends AppCompatActivity
                     }
         }
 
+    }
+
+    public void parseJson(String text){
+        SharedPreferences sharedPref = getSharedPreferences("pricesPreferences",
+                Context.MODE_PRIVATE);
+        try {
+            String jsonString = text;
+            JSONObject JSo = new JSONObject(jsonString);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("created", "OK");
+            JSONArray temp;
+            temp = JSo.getJSONArray("hargaKupat1");
+            hargaKupat1 = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaKupatN", temp.getInt(0));
+            editor.putInt("hargaKupatGo", temp.getInt(1));
+            editor.putInt("hargaKupatGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaKupatSet");
+            hargaKupatSet = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaKupatSetN", temp.getInt(0));
+            editor.putInt("hargaKupatSetGo", temp.getInt(1));
+            editor.putInt("hargaKupatSetGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaTahuToge1");
+            hargaTahuToge1 = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaTahuTogeN", temp.getInt(0));
+            editor.putInt("hargaTahuTogeGo", temp.getInt(1));
+            editor.putInt("hargaTahuTogeGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaTahuTogeSet");
+            hargaTahuTogeSet = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaTahuTogeSetN", temp.getInt(0));
+            editor.putInt("hargaTahuTogeSetGo", temp.getInt(1));
+            editor.putInt("hargaTahuTogeSetGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaKariAyam1");
+            hargaKariAyam1 = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaKariAyam1N", temp.getInt(0));
+            editor.putInt("hargaKariAyam1Go", temp.getInt(1));
+            editor.putInt("hargaKariAyam1Gr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaKariAyamSet");
+            hargaKariAyamSet = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaKariAyamSetN", temp.getInt(0));
+            editor.putInt("hargaKariAyamSetGo", temp.getInt(1));
+            editor.putInt("hargaKariAyamSetGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaKariSapi1");
+            hargaKariSapi1 = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaKariSapi1N", temp.getInt(0));
+            editor.putInt("hargaKariSapi1Go", temp.getInt(1));
+            editor.putInt("hargaKariSapi1Gr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaKariSapiSet");
+            hargaKariSapiSet = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaKariSapiSetN", temp.getInt(0));
+            editor.putInt("hargaKariSapiSetGo", temp.getInt(1));
+            editor.putInt("hargaKariSapiSetGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaTelur");
+            hargaTelur = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaTelurN", temp.getInt(0));
+            editor.putInt("hargaTelurGo", temp.getInt(1));
+            editor.putInt("hargaTelurGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaKerupukM");
+            hargaKerupukM = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaKerupukMN", temp.getInt(0));
+            editor.putInt("hargaKerupukMGo", temp.getInt(1));
+            editor.putInt("hargaKerupukMGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaKerupukA");
+            hargaKerupukA = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaKerupukAN", temp.getInt(0));
+            editor.putInt("hargaKerupukAGo", temp.getInt(1));
+            editor.putInt("hargaKerupukAGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaEmping");
+            hargaEmping = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaEmpingN", temp.getInt(0));
+            editor.putInt("hargaEmpingGo", temp.getInt(1));
+            editor.putInt("hargaEmpingGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaTahu");
+            hargaTahu = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaTahuN", temp.getInt(0));
+            editor.putInt("hargaTahuGo", temp.getInt(1));
+            editor.putInt("hargaTahuGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaPeyek");
+            hargaPeyek = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaPeyekN", temp.getInt(0));
+            editor.putInt("hargaPeyekGo", temp.getInt(1));
+            editor.putInt("hargaPeyekGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaDaging");
+            hargaDaging = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaDagingN", temp.getInt(0));
+            editor.putInt("hargaDagingGo", temp.getInt(1));
+            editor.putInt("hargaDagingGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaDagingA");
+            hargaDagingA = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaDagingAN", temp.getInt(0));
+            editor.putInt("hargaDagingAGo", temp.getInt(1));
+            editor.putInt("hargaDagingAGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaBumbu");
+            hargaBumbu = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaBumbuN", temp.getInt(0));
+            editor.putInt("hargaBumbuGo", temp.getInt(1));
+            editor.putInt("hargaBumbuGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaSaroja");
+            hargaSaroja = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaSarojaN", temp.getInt(0));
+            editor.putInt("hargaSarojaGo", temp.getInt(1));
+            editor.putInt("hargaSarojaGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaKentang");
+            hargaKentang = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaKentangN", temp.getInt(0));
+            editor.putInt("hargaKentangGo", temp.getInt(1));
+            editor.putInt("hargaKentangGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaLontongP");
+            hargaLontongP = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaLontongPN", temp.getInt(0));
+            editor.putInt("hargaLontongPGo", temp.getInt(1));
+            editor.putInt("hargaLontongPGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaSeblak");
+            hargaSeblak = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaSeblakN", temp.getInt(0));
+            editor.putInt("hargaSeblakGo", temp.getInt(1));
+            editor.putInt("hargaSeblakGr", temp.getInt(2));
+
+            editor.apply();
+        } catch (JSONException e){
+            System.out.println("PARSING ERRRPORRR");
+        }
     }
 }
