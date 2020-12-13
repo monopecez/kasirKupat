@@ -896,6 +896,8 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+        //finish();
+        //System.exit(0);
     }
 
     @Override
@@ -942,6 +944,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_ganti_harga) {
+            updateHarga();
 
         } else if (id == R.id.nav_tools) {
             attempDisconnect();
@@ -1019,6 +1024,16 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
+    public void updateHarga(){
+        Intent updateHargaIntent = new Intent(MainActivity.this,
+                UpdateHargaActivity.class);
+        startActivity(updateHargaIntent);
+        Intent i = getIntent();
+        System.out.println("BALIKAN = " + i.getStringExtra("hargaBaru"));
+
+    }
+
 
     public void attempDisconnect(){
         try {
