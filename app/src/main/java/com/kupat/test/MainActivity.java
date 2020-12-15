@@ -38,6 +38,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Set;
@@ -260,13 +261,12 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        boolean showUpdateDialog = false;
+        String textDialog = "";
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -279,30 +279,66 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences sharedPref = getSharedPreferences("pricesPreferences",
                 Context.MODE_PRIVATE);
-        if (sharedPref.contains("created")) {
+        if (sharedPref.getString("created", "kosong").equals("OK")) {
             hargaKupat1 = new int[]{sharedPref.getInt("hargaKupatN", -1), sharedPref.getInt("hargaKupatGo", -1), sharedPref.getInt("hargaKupatGr", -1)};
-            hargaKupatSet = new int[]{sharedPref.getInt("hargaKupatSetN", -1),  sharedPref.getInt("hargaKupatSetGo", -1), sharedPref.getInt("hargaKupatSetGr", -1)};
-            hargaTahuToge1 = new int[]{sharedPref.getInt("hargaTahuTogeN", -1),  sharedPref.getInt("hargaTahuTogeGo", -1), sharedPref.getInt("hargaTahuTogeGr", -1)};
-            hargaTahuTogeSet = new int[]{sharedPref.getInt("hargaTahuTogeSetN", -1),  sharedPref.getInt("hargaTahuTogeSetGo", -1), sharedPref.getInt("hargaTahuTogeSetGr", -1)};
-            hargaKariAyam1 = new int[]{sharedPref.getInt("hargaKariAyam1N", -1),  sharedPref.getInt("hargaKariAyam1Go", -1), sharedPref.getInt("hargaKariAyam1Gr", -1)};
-            hargaKariAyamSet = new int[]{sharedPref.getInt("hargaKariAyamSetN", -1),  sharedPref.getInt("hargaKariAyamSetGo", -1), sharedPref.getInt("hargaKariAyamSetGr", -1)};
-            hargaKariSapi1 = new int[]{sharedPref.getInt("hargaKariSapi1N", -1),  sharedPref.getInt("hargaKariSapi1Go", -1), sharedPref.getInt("hargaKariSapi1Gr", -1)};
-            hargaKariSapiSet = new int[]{sharedPref.getInt("hargaKariSapiSetN", -1),  sharedPref.getInt("hargaKariSapiSetGo", -1), sharedPref.getInt("hargaKariSapiSetGr", -1)};
-            hargaTelur = new int[]{sharedPref.getInt("hargaTelurN", -1),  sharedPref.getInt("hargaTelurGo", -1), sharedPref.getInt("hargaTelurGr", -1)};
-            hargaKerupukM = new int[]{sharedPref.getInt("hargaKerupukMN", -1),  sharedPref.getInt("hargaKerupukMGo", -1), sharedPref.getInt("hargaKerupukMGr", -1)};
-            hargaKerupukA = new int[]{sharedPref.getInt("hargaKerupukAN", -1),  sharedPref.getInt("hargaKerupukAGo", -1), sharedPref.getInt("hargaKerupukAGr", -1)};
-            hargaEmping = new int[]{sharedPref.getInt("hargaEmpingN", -1),  sharedPref.getInt("hargaEmpingGo", -1), sharedPref.getInt("hargaEmpingGr", -1)};
-            hargaTahu = new int[]{sharedPref.getInt("hargaTahuN", -1),  sharedPref.getInt("hargaTahuGo", -1), sharedPref.getInt("hargaTahuGr", -1)};
-            hargaPeyek = new int[]{sharedPref.getInt("hargaPeyekN", -1),  sharedPref.getInt("hargaPeyekGo", -1), sharedPref.getInt("hargaPeyekGr", -1)};
-            hargaDaging = new int[]{sharedPref.getInt("hargaDagingN", -1),  sharedPref.getInt("hargaDagingGo", -1), sharedPref.getInt("hargaDagingGr", -1)};
-            hargaDagingA = new int[]{sharedPref.getInt("hargaDagingAN", -1),  sharedPref.getInt("hargaDagingAGo", -1), sharedPref.getInt("hargaDagingAGr", -1)};
-            hargaBumbu = new int[]{sharedPref.getInt("hargaBumbuN", -1),  sharedPref.getInt("hargaBumbuGo", -1), sharedPref.getInt("hargaBumbuGr", -1)};
-            hargaSaroja = new int[]{sharedPref.getInt("hargaSarojaN", -1),  sharedPref.getInt("hargaSarojaGo", -1), sharedPref.getInt("hargaSarojaGr", -1)};
-            hargaKentang = new int[]{sharedPref.getInt("hargaKentangN", -1),  sharedPref.getInt("hargaKentangGo", -1), sharedPref.getInt("hargaKentangGr", -1)};
-            hargaLontongP = new int[]{sharedPref.getInt("hargaLontongPN", -1),  sharedPref.getInt("hargaLontongPGo", -1), sharedPref.getInt("hargaLontongPGr", -1)};
+            hargaKupatSet = new int[]{sharedPref.getInt("hargaKupatSetN", -1), sharedPref.getInt("hargaKupatSetGo", -1), sharedPref.getInt("hargaKupatSetGr", -1)};
+            hargaTahuToge1 = new int[]{sharedPref.getInt("hargaTahuTogeN", -1), sharedPref.getInt("hargaTahuTogeGo", -1), sharedPref.getInt("hargaTahuTogeGr", -1)};
+            hargaTahuTogeSet = new int[]{sharedPref.getInt("hargaTahuTogeSetN", -1), sharedPref.getInt("hargaTahuTogeSetGo", -1), sharedPref.getInt("hargaTahuTogeSetGr", -1)};
+            hargaKariAyam1 = new int[]{sharedPref.getInt("hargaKariAyam1N", -1), sharedPref.getInt("hargaKariAyam1Go", -1), sharedPref.getInt("hargaKariAyam1Gr", -1)};
+            hargaKariAyamSet = new int[]{sharedPref.getInt("hargaKariAyamSetN", -1), sharedPref.getInt("hargaKariAyamSetGo", -1), sharedPref.getInt("hargaKariAyamSetGr", -1)};
+            hargaKariSapi1 = new int[]{sharedPref.getInt("hargaKariSapi1N", -1), sharedPref.getInt("hargaKariSapi1Go", -1), sharedPref.getInt("hargaKariSapi1Gr", -1)};
+            hargaKariSapiSet = new int[]{sharedPref.getInt("hargaKariSapiSetN", -1), sharedPref.getInt("hargaKariSapiSetGo", -1), sharedPref.getInt("hargaKariSapiSetGr", -1)};
+            hargaTelur = new int[]{sharedPref.getInt("hargaTelurN", -1), sharedPref.getInt("hargaTelurGo", -1), sharedPref.getInt("hargaTelurGr", -1)};
+            hargaKerupukM = new int[]{sharedPref.getInt("hargaKerupukMN", -1), sharedPref.getInt("hargaKerupukMGo", -1), sharedPref.getInt("hargaKerupukMGr", -1)};
+            hargaKerupukA = new int[]{sharedPref.getInt("hargaKerupukAN", -1), sharedPref.getInt("hargaKerupukAGo", -1), sharedPref.getInt("hargaKerupukAGr", -1)};
+            hargaEmping = new int[]{sharedPref.getInt("hargaEmpingN", -1), sharedPref.getInt("hargaEmpingGo", -1), sharedPref.getInt("hargaEmpingGr", -1)};
+            hargaTahu = new int[]{sharedPref.getInt("hargaTahuN", -1), sharedPref.getInt("hargaTahuGo", -1), sharedPref.getInt("hargaTahuGr", -1)};
+            hargaPeyek = new int[]{sharedPref.getInt("hargaPeyekN", -1), sharedPref.getInt("hargaPeyekGo", -1), sharedPref.getInt("hargaPeyekGr", -1)};
+            hargaDaging = new int[]{sharedPref.getInt("hargaDagingN", -1), sharedPref.getInt("hargaDagingGo", -1), sharedPref.getInt("hargaDagingGr", -1)};
+            hargaDagingA = new int[]{sharedPref.getInt("hargaDagingAN", -1), sharedPref.getInt("hargaDagingAGo", -1), sharedPref.getInt("hargaDagingAGr", -1)};
+            hargaBumbu = new int[]{sharedPref.getInt("hargaBumbuN", -1), sharedPref.getInt("hargaBumbuGo", -1), sharedPref.getInt("hargaBumbuGr", -1)};
+            hargaSaroja = new int[]{sharedPref.getInt("hargaSarojaN", -1), sharedPref.getInt("hargaSarojaGo", -1), sharedPref.getInt("hargaSarojaGr", -1)};
+            hargaKentang = new int[]{sharedPref.getInt("hargaKentangN", -1), sharedPref.getInt("hargaKentangGo", -1), sharedPref.getInt("hargaKentangGr", -1)};
+            hargaLontongP = new int[]{sharedPref.getInt("hargaLontongPN", -1), sharedPref.getInt("hargaLontongPGo", -1), sharedPref.getInt("hargaLontongPGr", -1)};
             hargaSeblak = new int[]{sharedPref.getInt("hargaSeblakN", -1), sharedPref.getInt("hargaSeblakGo", -1), sharedPref.getInt("hargaSeblakGr", -1)};
+
+            System.out.println("XXXXXXXX: SUDAH ADA HARGA");
+        } else if (sharedPref.getString("created", "kosong").equals("UPDATED")) {
+            sharedPref = getSharedPreferences("pricesPreferences",
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("created", "OK");
+            editor.apply();
+            showUpdateDialog = true;
+            textDialog = "Berhasil update harga";
+            System.out.println("XXXXXXXX: BERHASIL UPDATE HARGA");
+            parseJson(sharedPref.getString("jsonSebelum", defaultJson));
+        } else if (sharedPref.getString("created", "kosong").equals("NOTOK")){
+            Toast.makeText(this.getApplicationContext(), "Gagal Update Harga\n Harga kembali ke kondisi sebelumnya", Toast.LENGTH_LONG);
+            System.out.println("ON REOPEN: GAGAL UPDATE HARGA");
+            parseJson(sharedPref.getString("jsonSebelum", defaultJson));
+            showUpdateDialog = true;
+            textDialog = "Gagal update harga, kembali ke kondisi sebelumnya";
+            System.out.println("XXXXXXXX: GAGAL UPDATE HARGA");
+            parseJson(sharedPref.getString("jsonSebelum", defaultJson));
         } else {
-            parseJson(defaultJson);
+            System.out.println("XXXXXXXX: KONDISI AWAL");
+            parseJson(sharedPref.getString("jsonSebelum", defaultJson));
+        }
+
+        if (showUpdateDialog){
+            builder = new AlertDialog.Builder(this);
+            builder.setMessage(textDialog)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    })
+                    .setNegativeButton("Cek Harga", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            clearContent(1);
+                        }
+                    });
+            builder.show();
         }
 
         btnPrint = (Button) findViewById(R.id.print);
@@ -1299,11 +1335,10 @@ public class MainActivity extends AppCompatActivity
     public void parseJson(String text){
         SharedPreferences sharedPref = getSharedPreferences("pricesPreferences",
                 Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         try {
             String jsonString = text;
             JSONObject JSo = new JSONObject(jsonString);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("created", "OK");
             JSONArray temp;
             temp = JSo.getJSONArray("hargaKupat1");
             hargaKupat1 = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
@@ -1431,12 +1466,17 @@ public class MainActivity extends AppCompatActivity
             editor.putInt("hargaSeblakGo", temp.getInt(1));
             editor.putInt("hargaSeblakGr", temp.getInt(2));
 
+            editor.putString("jsonSebelum", jsonString);
+            editor.putString("created", "OK");
+
             editor.apply();
         } catch (JSONException e){
             System.out.println("PARSING ERRRPORRR");
             Toast.makeText(this.getApplicationContext(), "WRONG JSON!! REVERT", Toast.LENGTH_LONG);
-            this.parseJson(defaultJson);
+            editor.putString("created", "NOTOK");
+            this.parseJson(sharedPref.getString("jsonSebelum", defaultJson));
             System.out.println(e);
+            editor.apply();
         }
     }
 }

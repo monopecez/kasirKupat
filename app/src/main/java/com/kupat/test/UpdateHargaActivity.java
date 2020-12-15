@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +48,15 @@ public class UpdateHargaActivity extends MainActivity {
                     try {
                         JSONObject JSo = new JSONObject(jsonString);
                         parseJson(jsonString);
+                        SharedPreferences sharedPref = getSharedPreferences("pricesPreferences",
+                                Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        if (sharedPref.getString("created", "").equals("OK")) {
+                            editor.putString("created", "UPDATED");
+                        }
+                        editor.apply();
+
+
                         finish();
                     } catch (JSONException e){
                         Context context = getApplicationContext();
