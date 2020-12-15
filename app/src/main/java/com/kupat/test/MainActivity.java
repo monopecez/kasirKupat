@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity
     private EscPos escpos;
     BluetoothDevice mBluetoothDevice;
 
+    static String defaultJson = "{\"hargaKupat1\":[18000,22500,20000],\"hargaKupatSet\":[14000,17500,15000],\"hargaTahuToge1\":[18000,22500,20000],\"hargaTahuTogeSet\":[14000,17500,15000],\"hargaKariAyam1\":[21000,26500,23000],\"hargaKariAyamSet\":[16000,20000,17000],\"hargaKariSapi1\":[21000,26500,23000],\"hargaKariSapiSet\":[16000,20000,17000],\"hargaTelur\":[4000,5000,4500],\"hargaKerupukM\":[1000,1250,2250],\"hargaKerupukA\":[500,625,600],\"hargaEmping\":[4000,5000,4500],\"hargaTahu\":[2500,3125,2250],\"hargaPeyek\":[10000,12500,11000],\"hargaDaging\":[8000,10000,7000],\"hargaDagingA\":[6000,7500,7000],\"hargaBumbu\":[7000,8750,7000],\"hargaSaroja\":[9000,11250,10000],\"hargaKentang\":[10000,12500,10000],\"hargaLontongP\":[6000,7500,7500],\"hargaSeblak\":[6000,7500,7500]}";
 
     static int priceIndex = 0;
     int[] hargaKupat1   ;
@@ -301,8 +302,7 @@ public class MainActivity extends AppCompatActivity
             hargaLontongP = new int[]{sharedPref.getInt("hargaLontongPN", -1),  sharedPref.getInt("hargaLontongPGo", -1), sharedPref.getInt("hargaLontongPGr", -1)};
             hargaSeblak = new int[]{sharedPref.getInt("hargaSeblakN", -1), sharedPref.getInt("hargaSeblakGo", -1), sharedPref.getInt("hargaSeblakGr", -1)};
         } else {
-            String jsonString = "{\"hargaKupat1\":[18000,22500,20000],\"hargaKupatSet\":[14000,17500,15000],\"hargaTahuToge1\":[18000,22500,20000],\"hargaTahuTogeSet\":[14000,17500,15000],\"hargaKariAyam1\":[21000,26500,23000],\"hargaKariAyamSet\":[16000,20000,17000],\"hargaKariSapi1\":[21000,26500,23000],\"hargaKariSapiSet\":[16000,20000,17000],\"hargaTelur\":[4000,5000,4500],\"hargaKerupukM\":[1000,1250,2250],\"hargaKerupukA\":[500,625,600],\"hargaEmping\":[4000,5000,4500],\"hargaTahu\":[2500,3125,2250],\"hargaPeyek\":[10000,12500,11000],\"hargaDaging\":[8000,10000,7000],\"hargaDagingA\":[6000,7500,7000],\"hargaBumbu\":[7000,8750,7000],\"hargaSaroja\":[9000,11250,10000],\"hargaKentang\":[10000,12500,10000],\"hargaLontongP\":[6000,7500,7500],\"hargaSeblak\":[6000,7500,7500]}";
-            parseJson(jsonString);
+            parseJson(defaultJson);
         }
 
         btnPrint = (Button) findViewById(R.id.print);
@@ -415,7 +415,7 @@ public class MainActivity extends AppCompatActivity
                 })
                 .setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        clearContent();
+                        clearContent(0);
                     }
                 });
 
@@ -424,6 +424,8 @@ public class MainActivity extends AppCompatActivity
         final ConstraintLayout gojekDetail = (ConstraintLayout) findViewById(R.id.gojekDetail);
         gojekSwitch = (Switch) findViewById(R.id.gojekswitch);
         grabSwitch = (Switch) findViewById(R.id.grabswitch);
+
+        this.clearContent(0);
 
         gojekSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -928,7 +930,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.clear_setting) {
-            clearContent();
+            clearContent(0);
             return true;
         }
 
@@ -947,8 +949,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_ganti_harga) {
             updateHarga();
-
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_cek_harga) {
+            clearContent(1);
+        }
+        else if (id == R.id.nav_tools) {
             attempDisconnect();
             ScanBluetooth();
         }
@@ -1029,9 +1033,7 @@ public class MainActivity extends AppCompatActivity
         Intent updateHargaIntent = new Intent(MainActivity.this,
                 UpdateHargaActivity.class);
         startActivity(updateHargaIntent);
-        Intent i = getIntent();
-        System.out.println("BALIKAN = " + i.getStringExtra("hargaBaru"));
-
+        finish();
     }
 
 
@@ -1067,28 +1069,30 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void clearContent(){
-        nKupat = 0;
-        nKupatSet = 0;
-        nTahuToge = 0;
-        nTahuTogeSet =0;
-        nKariAyam = 0;
-        nKariAyamSet = 0;
-        nDagingA = 0;
-        nKariSapi = 0;
-        nKariSapiSet = 0;
-        nTelur = 0;
-        nKerupukM = 0;
-        nKerupukA = 0;
-        nEmping = 0;
-        nTahu = 0;
-        nPeyek = 0;
-        nDaging = 0;
-        nBumbu = 0;
-        nSeroja = 0;
-        nKentang = 0;
-        nLontongP = 0;
-        nSeblak = 0;
+    public void clearContent(int num){
+        gojekSwitch.setChecked(false);
+        priceIndex = 0;
+        nKupat = num;
+        nKupatSet = num;
+        nTahuToge = num;
+        nTahuTogeSet =num;
+        nKariAyam = num;
+        nKariAyamSet = num;
+        nDagingA = num;
+        nKariSapi = num;
+        nKariSapiSet = num;
+        nTelur = num;
+        nKerupukM = num;
+        nKerupukA = num;
+        nEmping = num;
+        nTahu = num;
+        nPeyek = num;
+        nDaging = num;
+        nBumbu = num;
+        nSeroja = num;
+        nKentang = num;
+        nLontongP = num;
+        nSeblak = num;
         gojekpemesan.setText("");
         gojekpin.setText("");
         gojekantrian.setText("");
@@ -1154,7 +1158,7 @@ public class MainActivity extends AppCompatActivity
         };
         t.start();
         t.join();
-        clearContent();
+        clearContent(0);
     }
 
     public boolean PrintReceipt() throws InterruptedException {
@@ -1210,13 +1214,13 @@ public class MainActivity extends AppCompatActivity
         };
         t.start();
         t.join();
-        clearContent();
+        clearContent(0);
 
         /*
         if (gojekSwitch.isChecked()){
             builder.show();
         } else {
-            clearContent();
+            clearContent(0);
         }
         */
         return true;
@@ -1277,7 +1281,7 @@ public class MainActivity extends AppCompatActivity
                     })
                     .setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            //clearContent();
+                            //clearContent(0);
                         }
                     });
             builder0.show();
@@ -1430,6 +1434,9 @@ public class MainActivity extends AppCompatActivity
             editor.apply();
         } catch (JSONException e){
             System.out.println("PARSING ERRRPORRR");
+            Toast.makeText(this.getApplicationContext(), "WRONG JSON!! REVERT", Toast.LENGTH_LONG);
+            this.parseJson(defaultJson);
+            System.out.println(e);
         }
     }
 }

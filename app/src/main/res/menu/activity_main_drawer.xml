@@ -15,7 +15,11 @@
         <item
             android:id="@+id/nav_ganti_harga"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Ganti dan Cek Harga" />
+            android:title="Ganti Harga" />
+        <item
+            android:id="@+id/nav_cek_harga"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Cek Harga" />
         <item
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_menu_manage"

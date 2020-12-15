@@ -24,37 +24,54 @@ import org.json.JSONObject;
 import java.util.Set;
 
 
-public class UpdateHargaActivity extends Activity {
+public class UpdateHargaActivity extends MainActivity {
 
     static EditText jsonInput;
-    static Button jsonButton;
+    static Button jsonButtonOk;
+    static Button jsonButtonCancel;
 
     @Override
     protected void onCreate(Bundle mSavedInstanceState) {
         super.onCreate(mSavedInstanceState);
         setContentView(R.layout.update_harga);
         jsonInput = (EditText) findViewById(R.id.hargaBaruET);
-        jsonButton = (Button) findViewById(R.id.hargaBaruButton);
-        jsonButton.setOnClickListener(new View.OnClickListener() {
+        jsonButtonOk = (Button) findViewById(R.id.hargaBaruButton);
+        jsonButtonCancel = (Button) findViewById(R.id.hargaBaruButtonCancel);
+
+        jsonButtonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    System.out.println("YANG DIINPUT : " + jsonInput.getText().toString());
-                    String jsonString = jsonInput.getText().toString();
-                    JSONObject JSo = new JSONObject(jsonString);
+                System.out.println("YANG DIINPUT : " + jsonInput.getText().toString());
+                String jsonString = jsonInput.getText().toString();
+                if(jsonString.length()!=0){
+                    try {
+                        JSONObject JSo = new JSONObject(jsonString);
+                        parseJson(jsonString);
+                        finish();
+                    } catch (JSONException e){
+                        Context context = getApplicationContext();
+                        CharSequence text = "INVALID JSON";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        System.out.println(e);
+                    };
+                    }
+            }
+        });
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("hargaBaru", jsonString);
-                    startActivity(intent);
+        jsonButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-                } catch (JSONException e){
-                    Context context = getApplicationContext();
-                    CharSequence text = "INVALID JSON";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    System.out.println(e);
-                };
+        jsonButtonCancel.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                jsonInput.setText(defaultJson);
+                return true;
             }
         });
 

@@ -18,4 +18,11 @@
         android:layout_margin="8dp"
         android:text="Update Harga"
         android:id="@+id/hargaBaruButton"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Cancel"
+        android:id="@+id/hargaBaruButtonCancel"/>
 </LinearLayout>
