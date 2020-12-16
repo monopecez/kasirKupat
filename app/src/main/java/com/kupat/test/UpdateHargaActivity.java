@@ -104,7 +104,7 @@ public class UpdateHargaActivity extends MainActivity {
 
 // Instantiate the RequestQueue.
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="https://bookshelf-170600.appspot.com/";
+                String url ="https://bookshelf-170600.appspot.com/harga";
 
 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -113,6 +113,7 @@ public class UpdateHargaActivity extends MainActivity {
                             public void onResponse(String response) {
                                 // Display the first 500 characters of the response string.
                                 textView.setText("Response is: "+ response);
+                                jsonInput.setText(response);
                             }
                         }, new Response.ErrorListener() {
                     @Override
