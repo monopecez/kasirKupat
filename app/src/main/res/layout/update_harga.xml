@@ -25,4 +25,19 @@
         android:layout_margin="8dp"
         android:text="Cancel"
         android:id="@+id/hargaBaruButtonCancel"/>
+
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Request"
+        android:id="@+id/hargaBaruButtonRequest"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="response here"
+        android:layout_margin="8dp"
+        android:id="@+id/hargaBaruResponse"/>
 </LinearLayout>

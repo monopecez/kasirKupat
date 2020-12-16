@@ -19,6 +19,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +37,8 @@ public class UpdateHargaActivity extends MainActivity {
     static EditText jsonInput;
     static Button jsonButtonOk;
     static Button jsonButtonCancel;
+    static Button jsonButtonRequest;
+    static TextView jsonTVResponse;
 
     @Override
     protected void onCreate(Bundle mSavedInstanceState) {
@@ -38,7 +47,7 @@ public class UpdateHargaActivity extends MainActivity {
         jsonInput = (EditText) findViewById(R.id.hargaBaruET);
         jsonButtonOk = (Button) findViewById(R.id.hargaBaruButton);
         jsonButtonCancel = (Button) findViewById(R.id.hargaBaruButtonCancel);
-
+        jsonButtonRequest = (Button) findViewById(R.id.hargaBaruButtonRequest);
         jsonButtonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +91,38 @@ public class UpdateHargaActivity extends MainActivity {
             public boolean onLongClick(View v) {
                 jsonInput.setText(defaultJson);
                 return true;
+            }
+        });
+
+        jsonButtonRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                final TextView textView = (TextView) findViewById(R.id.hargaBaruResponse);
+// ...
+
+// Instantiate the RequestQueue.
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                String url ="https://bookshelf-170600.appspot.com/";
+
+// Request a string response from the provided URL.
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                // Display the first 500 characters of the response string.
+                                textView.setText("Response is: "+ response);
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        textView.setText("That didn't work!");
+                    }
+                });
+
+// Add the request to the RequestQueue.
+                queue.add(stringRequest);
             }
         });
 
