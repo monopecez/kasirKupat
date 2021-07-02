@@ -303,7 +303,8 @@ public class MainActivity extends AppCompatActivity
             hargaSeblak = new int[]{sharedPref.getInt("hargaSeblakN", -1), sharedPref.getInt("hargaSeblakGo", -1), sharedPref.getInt("hargaSeblakGr", -1)};
 
             System.out.println("XXXXXXXX: SUDAH ADA HARGA");
-        } else if (sharedPref.getString("created", "kosong").equals("UPDATED")) {
+        }
+        else if (sharedPref.getString("created", "kosong").equals("UPDATED")) {
             sharedPref = getSharedPreferences("pricesPreferences",
                     Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
@@ -1056,7 +1057,6 @@ public class MainActivity extends AppCompatActivity
                 startActivityForResult(enableBtIntent,
                         REQUEST_ENABLE_BT);
             } else {
-                ListPairedDevices();
                 Intent connectIntent = new Intent(MainActivity.this,
                         DeviceListActivity.class);
                 startActivityForResult(connectIntent,
@@ -1200,7 +1200,8 @@ public class MainActivity extends AppCompatActivity
     public boolean PrintReceipt() throws InterruptedException {
         if (mBluetoothSocket == null){
             Toast.makeText(MainActivity.this, "Silakan hubungkan printer terlebih dahulu", Toast.LENGTH_SHORT).show();
-            ScanBluetooth();
+            //attempDisconnect();
+            //ScanBluetooth();
             return false;
         }
         else {
@@ -1265,29 +1266,29 @@ public class MainActivity extends AppCompatActivity
     public void ReceiptBuilder(EscPos escpos, boolean first) throws IOException {
         if (hargaTotal != 0){
             Style rightJust = new Style().setJustification(EscPosConst.Justification.Right);
-            if (nKupat != 0){escpos.writeLF(nKupat +  " x Kupat Tahu @" + hargaKupat1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKupat);}
-            if (nKupatSet != 0){escpos.writeLF(nKupatSet + " x Kpt Tahu ½ @" + hargaKupatSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKupatSet);}
-            if (nTahuToge != 0){escpos.writeLF(nTahuToge +  " x Tahu Toge  @" + hargaTahuToge1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahuToge);}
+            if (nKupat != 0){escpos.writeLF(nKupat             + " x Kupat Tahu @" + hargaKupat1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKupat);}
+            if (nKupatSet != 0){escpos.writeLF(nKupatSet       + " x Kpt Tahu ½ @" + hargaKupatSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKupatSet);}
+            if (nTahuToge != 0){escpos.writeLF(nTahuToge       + " x Tahu Toge  @" + hargaTahuToge1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahuToge);}
             if (nTahuTogeSet != 0){escpos.writeLF(nTahuTogeSet + " x Tahu Toge½ @" + hargaTahuTogeSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahuTogeSet);}
-            if (nTahu != 0){escpos.writeLF(nTahu + " x Tahu      @" + hargaTahu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahu);}
-            if (nBumbu != 0){escpos.writeLF(nBumbu + " x Bumbu+++  @" + hargaBumbu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaBumbu);}
-            if (nKariAyam != 0){escpos.writeLF(nKariAyam + " x Kari Ayam  @" + hargaKariAyam1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariAyam);}
+            if (nTahu != 0){escpos.writeLF(nTahu               + " x Tahu       @" + hargaTahu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTahu);}
+            if (nBumbu != 0){escpos.writeLF(nBumbu             + " x Bumbu+++   @" + hargaBumbu[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaBumbu);}
+            if (nKariAyam != 0){escpos.writeLF(nKariAyam       + " x Kari Ayam  @" + hargaKariAyam1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariAyam);}
             if (nKariAyamSet != 0){escpos.writeLF(nKariAyamSet + " x Kari Ayam½ @" + hargaKariAyamSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariAyamSet);}
-            if (nDagingA != 0){escpos.writeLF(nDagingA + " x DagingA++ @" + hargaDagingA[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaDagingA);}
+            if (nDagingA != 0){escpos.writeLF(nDagingA         + " x DagingA++  @" + hargaDagingA[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaDagingA);}
 
-            if (nKariSapi != 0){escpos.writeLF(nKariSapi + " x Kari Sapi  @" + hargaKariSapi1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariSapi);}
+            if (nKariSapi != 0){escpos.writeLF(nKariSapi       + " x Kari Sapi  @" + hargaKariSapi1[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariSapi);}
             if (nKariSapiSet != 0){escpos.writeLF(nKariSapiSet + " x Kari Sapi½ @" + hargaKariSapiSet[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKariSapiSet);}
-            if (nDaging != 0){escpos.writeLF(nDaging + " x Daging++  @" + hargaDaging[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaDaging);}
+            if (nDaging != 0){escpos.writeLF(nDaging           + " x Daging++   @" + hargaDaging[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaDaging);}
 
-            if (nTelur != 0){escpos.writeLF(nTelur + " x Telur      @" + hargaTelur[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTelur);}
+            if (nTelur != 0){escpos.writeLF(nTelur       + " x Telur      @" + hargaTelur[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaTelur);}
             if (nKerupukM != 0){escpos.writeLF(nKerupukM + " x Kerupuk M  @" + hargaKerupukM[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKerupukM);}
             if (nKerupukA != 0){escpos.writeLF(nKerupukA + " x Kerupuk A  @" + hargaKerupukA[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKerupukA);}
-            if (nEmping != 0){escpos.writeLF(nEmping + " x Emping    @" + hargaEmping[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaEmping);}
-            if (nPeyek != 0){escpos.writeLF(nPeyek + " x Rempeyek  @" + hargaPeyek[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaPeyek);}
-            if (nSeroja != 0){escpos.writeLF(nSeroja + " x Seroja    @" + hargaSaroja[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaSeroja);}
-            if (nKentang != 0){escpos.writeLF(nKentang + " x Mustopa   @" + hargaKentang[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKentang);}
-            if (nLontongP != 0){escpos.writeLF(nLontongP + " x Lontong++ @" + hargaLontongP[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaLontongP);}
-            if (nSeblak != 0){escpos.writeLF(nSeblak +     " x Seblak    @" + hargaSeblak[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaSeblak);}
+            if (nEmping != 0){escpos.writeLF(nEmping     + " x Emping     @" + hargaEmping[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaEmping);}
+            if (nPeyek != 0){escpos.writeLF(nPeyek       + " x Rempeyek   @" + hargaPeyek[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaPeyek);}
+            if (nSeroja != 0){escpos.writeLF(nSeroja     + " x Seroja     @" + hargaSaroja[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaSeroja);}
+            if (nKentang != 0){escpos.writeLF(nKentang   + " x Mustopa    @" + hargaKentang[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKentang);}
+            if (nLontongP != 0){escpos.writeLF(nLontongP + " x Lontong++  @" + hargaLontongP[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaLontongP);}
+            if (nSeblak != 0){escpos.writeLF(nSeblak +     " x Seblak     @" + hargaSeblak[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaSeblak);}
 
             if(first) escpos.writeLF(rightJust, "Total: " + hargaTotal);
         }

@@ -5,6 +5,14 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Hitung" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Panggilan Cepat" />
+        <item
             android:id="@+id/nav_ganti_harga"
             android:icon="@drawable/ic_menu_manage"
             android:title="Ganti Harga" />
@@ -15,7 +23,7 @@
         <item
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Sambung Printer" />
+            android:title="Printer" />
     </group>
 
 
