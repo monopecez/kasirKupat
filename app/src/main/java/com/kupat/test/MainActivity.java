@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
     int[] hargaKentang   ;
     int[] hargaLontongP  ;
     int[] hargaSeblak    ;
-    int[] hargaJeruk ;
+    int[] hargaJeruk    ;
 
     static int nKupat = 0;
     static int nKupatSet = 0;
@@ -308,6 +308,7 @@ public class MainActivity extends AppCompatActivity
             hargaKentang = new int[]{sharedPref.getInt("hargaKentangN", -1), sharedPref.getInt("hargaKentangGo", -1), sharedPref.getInt("hargaKentangGr", -1)};
             hargaLontongP = new int[]{sharedPref.getInt("hargaLontongPN", -1), sharedPref.getInt("hargaLontongPGo", -1), sharedPref.getInt("hargaLontongPGr", -1)};
             hargaSeblak = new int[]{sharedPref.getInt("hargaSeblakN", -1), sharedPref.getInt("hargaSeblakGo", -1), sharedPref.getInt("hargaSeblakGr", -1)};
+            hargaJeruk = new int[]{sharedPref.getInt("hargaJerukN", -1), sharedPref.getInt("hargaJerukGo", -1), sharedPref.getInt("hargaJerukGr", -1)};
 
             System.out.println("XXXXXXXX: SUDAH ADA HARGA");
         }
@@ -1284,7 +1285,6 @@ public class MainActivity extends AppCompatActivity
         };
         t.start();
         t.join();
-        clearContent(0);
 
         /*
         if (gojekSwitch.isChecked()){
@@ -1328,6 +1328,21 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void dialogClearReceipt(){
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage("Hapus data sebelumnya?")
+                .setPositiveButton("Ya, hapus", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        clearContent(0);
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        builder.show();
+    }
+
     public void dialogInputPIN(){
         if ((gojekSwitch.isChecked() || grabSwitch.isChecked()) && !(mBluetoothSocket == null)) {
             builder0 = new AlertDialog.Builder(this);
@@ -1344,7 +1359,10 @@ public class MainActivity extends AppCompatActivity
                         public void onClick(DialogInterface dialog, int id) {
                             try {
                                 pin_sementara = ed_input.getText().toString();
-                                if (!(PrintReceipt())){PrintReceipt();}
+                                if (!(PrintReceipt())){
+                                    PrintReceipt();
+                                }
+                                dialogClearReceipt();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
