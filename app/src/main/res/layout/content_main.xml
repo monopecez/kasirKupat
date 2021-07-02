@@ -124,7 +124,7 @@
                 android:id="@+id/gojekDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +148,9 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/pemesan2"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:nextFocusForward="@+id/pemesan2"
+                        android:imeOptions="actionNext"/>
 
                     <EditText
                         android:id="@+id/pemesan2"
@@ -161,7 +163,9 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/gojekpemesan" />
+                        app:layout_constraintStart_toEndOf="@+id/gojekpemesan"
+                        android:nextFocusForward="@+id/gojekantrian"
+                        android:imeOptions="actionNext"/>
                 </android.support.constraint.ConstraintLayout>
 
                 <EditText
