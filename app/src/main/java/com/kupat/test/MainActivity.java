@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
     private EscPos escpos;
     BluetoothDevice mBluetoothDevice;
 
-    static String defaultJson = "{\"hargaKupat1\":[18000,22500,20000],\"hargaKupatSet\":[14000,17500,15000],\"hargaTahuToge1\":[18000,22500,20000],\"hargaTahuTogeSet\":[14000,17500,15000],\"hargaKariAyam1\":[21000,26500,23000],\"hargaKariAyamSet\":[16000,20000,17000],\"hargaKariSapi1\":[21000,26500,23000],\"hargaKariSapiSet\":[16000,20000,17000],\"hargaTelur\":[4000,5000,4500],\"hargaKerupukM\":[1000,1250,2250],\"hargaKerupukA\":[500,625,600],\"hargaEmping\":[4000,5000,4500],\"hargaTahu\":[2500,3125,2250],\"hargaPeyek\":[10000,12500,11000],\"hargaDaging\":[8000,10000,7000],\"hargaDagingA\":[6000,7500,7000],\"hargaBumbu\":[7000,8750,7000],\"hargaSaroja\":[9000,11250,10000],\"hargaKentang\":[10000,12500,10000],\"hargaLontongP\":[6000,7500,7500],\"hargaSeblak\":[6000,7500,7500]}";
+    static String defaultJson = "{\"hargaKupat1\":[18000,22500,20000],\"hargaKupatSet\":[14000,17500,15000],\"hargaTahuToge1\":[18000,22500,20000],\"hargaTahuTogeSet\":[14000,17500,15000],\"hargaKariAyam1\":[21000,26500,23000],\"hargaKariAyamSet\":[16000,20000,17000],\"hargaKariSapi1\":[21000,26500,23000],\"hargaKariSapiSet\":[16000,20000,17000],\"hargaTelur\":[4000,5000,4500],\"hargaKerupukM\":[1000,1250,2250],\"hargaKerupukA\":[500,625,600],\"hargaEmping\":[4000,5000,4500],\"hargaTahu\":[2500,3125,2250],\"hargaPeyek\":[10000,12500,11000],\"hargaDaging\":[8000,10000,7000],\"hargaDagingA\":[6000,7500,7000],\"hargaBumbu\":[7000,8750,7000],\"hargaSaroja\":[9000,11250,10000],\"hargaKentang\":[10000,12500,10000],\"hargaLontongP\":[6000,7500,7500],\"hargaSeblak\":[6000,7500,7500],\"hargaJeruk\":[10000,12500,12500]}";
 
     static int priceIndex = 0;
     int[] hargaKupat1   ;
@@ -91,7 +91,8 @@ public class MainActivity extends AppCompatActivity
     int[] hargaSaroja    ;
     int[] hargaKentang   ;
     int[] hargaLontongP  ;
-    int[] hargaSeblak;
+    int[] hargaSeblak    ;
+    int[] hargaJeruk ;
 
     static int nKupat = 0;
     static int nKupatSet = 0;
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity
     static int nKentang = 0;
     static int nLontongP = 0;
     static int nSeblak =  0;
+    static int nJeruk = 0;
 
     static String pin_sementara = "";
 
@@ -145,6 +147,7 @@ public class MainActivity extends AppCompatActivity
     static int totalHargaKentang = 0;
     static int totalHargaLontongP = 0;
     static int totalHargaSeblak = 0;
+    static int totalHargaJeruk = 0;
 
     static AlertDialog.Builder builder;
     static AlertDialog.Builder builder0;
@@ -177,10 +180,12 @@ public class MainActivity extends AppCompatActivity
     static TextView kentangtotal;
     static TextView lontongptotal;
     static TextView seblaktotal;
+    static TextView jeruktotal;
 
     static TextView totalhargaTV;
 
     static EditText gojekpemesan;
+    static EditText pemesan2;
     static EditText gojekpin;
     static EditText gojekantrian;
 
@@ -251,12 +256,14 @@ public class MainActivity extends AppCompatActivity
         totalHargaSeblak = hargaSeblak[priceIndex] * nSeblak;
         seblaktotal.setText(nSeblak + " | " + totalHargaSeblak);
 
+        totalHargaJeruk = hargaJeruk[priceIndex] * nJeruk;
+        jeruktotal.setText(nJeruk + " | " + totalHargaJeruk);
 
         hargaTotal = totalHargaKupat + totalHargaKupatSet + totalHargaTahuToge + totalHargaTahuTogeSet + totalHargaTahu + totalHargaBumbu +
                 totalHargaKariAyam + totalHargaKariAyamSet + totalHargaDagingA +
                 totalHargaKariSapi + totalHargaKariSapiSet + totalHargaDaging +
                 totalHargaTelur + totalHargaKerupukM + totalHargaKerupukA + totalHargaEmping +
-                totalHargaPeyek + totalHargaSeroja + totalHargaKentang + totalHargaLontongP + totalHargaSeblak;
+                totalHargaPeyek + totalHargaSeroja + totalHargaKentang + totalHargaLontongP + totalHargaSeblak + totalHargaJeruk;
         totalhargaTV.setText("" + hargaTotal);
 
     }
@@ -433,8 +440,12 @@ public class MainActivity extends AppCompatActivity
         Button seblakkurang = (Button) findViewById(R.id.seblakkurang);
         seblaktotal = (TextView) findViewById(R.id.seblaktotal);
 
+        Button jeruktambah = (Button) findViewById(R.id.jeruktambah);
+        Button jerukkurang = (Button) findViewById(R.id.jerukkurang);
+        jeruktotal = (TextView) findViewById(R.id.jeruktotal);
 
         gojekpemesan = (EditText) findViewById(R.id.gojekpemesan);
+        pemesan2 = (EditText) findViewById(R.id.pemesan2);
         gojekpin = (EditText) findViewById(R.id.gojekpin);
         gojekantrian = (EditText) findViewById(R.id.gojekantrian);
 
@@ -908,6 +919,25 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        jeruktambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nJeruk += 1;
+                calculatePrice(priceIndex);
+            }
+        });
+
+        jerukkurang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nJeruk -= 1;
+                if (nJeruk < 0){
+                    nJeruk = 0;
+                }
+                calculatePrice(priceIndex);
+            }
+        });
+
         btnPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1129,7 +1159,9 @@ public class MainActivity extends AppCompatActivity
         nKentang = num;
         nLontongP = num;
         nSeblak = num;
+        nJeruk = num;
         gojekpemesan.setText("");
+        pemesan2.setText("");
         gojekpin.setText("");
         gojekantrian.setText("");
         pin_sementara = "";
@@ -1221,7 +1253,7 @@ public class MainActivity extends AppCompatActivity
                     escpos.writeLF(title, "--------------------");
 
                     if (gojekSwitch.isChecked()){
-                        escpos.writeLF("A/N: " + gojekpemesan.getText().toString());
+                        escpos.writeLF("A/N: " + gojekpemesan.getText().toString() + " | " + pemesan2.getText().toString());
                         escpos.write("No : " + gojekantrian.getText().toString() + " |      PIN: ");
                         //Style PIN = new Style().setColorMode(Style.ColorMode.WhiteOnBlack);
                         escpos.writeLF(pin_sementara);
@@ -1241,6 +1273,7 @@ public class MainActivity extends AppCompatActivity
                     escpos.writeLF(title, "TERIMA KASIH :)");
                     escpos.writeLF(title, formattedDate);
                     escpos.writeLF(title, "--------------------");
+                    escpos.writeLF(title, "Semoga sehat selalu");
                     escpos.feed(2);
 
 
@@ -1289,6 +1322,7 @@ public class MainActivity extends AppCompatActivity
             if (nKentang != 0){escpos.writeLF(nKentang   + " x Mustopa    @" + hargaKentang[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaKentang);}
             if (nLontongP != 0){escpos.writeLF(nLontongP + " x Lontong++  @" + hargaLontongP[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaLontongP);}
             if (nSeblak != 0){escpos.writeLF(nSeblak +     " x Seblak     @" + hargaSeblak[priceIndex]); if(first) escpos.writeLF(rightJust, "" + totalHargaSeblak);}
+            if (nJeruk != 0) {escpos.writeLF(nJeruk +      " x Jeruk      @" + hargaJeruk[priceIndex]);  if(first) escpos.writeLF(rightJust, "" + totalHargaJeruk);}
 
             if(first) escpos.writeLF(rightJust, "Total: " + hargaTotal);
         }
@@ -1466,6 +1500,12 @@ public class MainActivity extends AppCompatActivity
             editor.putInt("hargaSeblakN", temp.getInt(0));
             editor.putInt("hargaSeblakGo", temp.getInt(1));
             editor.putInt("hargaSeblakGr", temp.getInt(2));
+
+            temp = JSo.getJSONArray("hargaJeruk");
+            hargaJeruk = new int[]{temp.getInt(0), temp.getInt(1), temp.getInt(2)};
+            editor.putInt("hargaJerukN", temp.getInt(0));
+            editor.putInt("hargaJerukGo", temp.getInt(1));
+            editor.putInt("hargaJerukGr", temp.getInt(2));
 
             editor.putString("jsonSebelum", jsonString);
             editor.putString("created", "OK");

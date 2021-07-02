@@ -130,17 +130,40 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/header2">
 
-                <EditText
-                    android:id="@+id/gojekpemesan"
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/detailnama"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    android:hint="Nama Pemesan"
-                    android:maxLength="27"
-                    android:nextClusterForward="@+id/gojekantrian"
-                    android:singleLine="true"
-                    tools:layout_editor_absoluteX="-39dp"
-                    tools:layout_editor_absoluteY="63dp" />
+                    android:nextClusterForward="@+id/gojekantrian">
+
+                    <EditText
+                        android:id="@+id/gojekpemesan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        android:hint="Nama 1"
+                        android:maxLength="27"
+                        android:singleLine="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/namapemesan"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <EditText
+                        android:id="@+id/pemesan2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:hint="Nama 2"
+                        android:maxLength="27"
+                        android:singleLine="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/gojekpemesan" />
+                </android.support.constraint.ConstraintLayout>
 
                 <EditText
                     android:id="@+id/gojekantrian"
@@ -155,7 +178,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/gojekpin"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/gojekpemesan" />
+                    app:layout_constraintTop_toBottomOf="@+id/detailnama" />
 
                 <EditText
                     android:id="@+id/gojekpin"
@@ -1327,14 +1350,72 @@
 
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/seblak"
+                android:id="@+id/jeruk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E8E8E8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
+                android:background="#E8E8E8"
                 app:layout_constraintTop_toBottomOf="@+id/lontongp">
+
+                <TextView
+                    android:id="@+id/jeruktv"
+                    android:layout_width="128dip"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="left|center_vertical|center_horizontal"
+                    android:text="Jeruk     "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.857" />
+
+                <Button
+                    android:id="@+id/jerukkurang"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="-"
+                    app:layout_constraintStart_toEndOf="@+id/jeruktv"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <Button
+                    android:id="@+id/jeruktambah"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:text="+"
+                    app:layout_constraintStart_toEndOf="@+id/jerukkurang"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/jeruktotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="right|center_vertical"
+                    android:text="0 | 0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/seblak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/jeruk">
 
                 <TextView
                     android:id="@+id/seblaktv"
